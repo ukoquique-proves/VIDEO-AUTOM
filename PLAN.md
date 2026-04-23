@@ -92,6 +92,16 @@ Demonstrate integration of old software outputs with new communication platforms
     - [ ] Design high-impact Thumbnail.
     - [ ] Global rollout (LinkedIn/Discord).
 
+### Phase 6: Architectural Evolution (Decoupling & Providers)
+- [ ] **Transition to Hexagonal Architecture** 🎯 **Strategic Goal**
+    - [ ] Define `AIProvider` Port (Interface) in the domain layer.
+    - [ ] Move Groq logic to an `AIAdapter` (Infrastructure layer).
+    - [ ] Ensure the core `AIService` depends only on the Port, not the Groq implementation.
+- [ ] **Multi-Provider Support**
+    - [ ] Implement `OpenAIAdapter` using the `AIProvider` port.
+    - [ ] Implement `GeminiAdapter` using the `AIProvider` port.
+    - [ ] Add runtime provider selection logic (via configuration or request header).
+
 ---
 
 ## Stretch Goals

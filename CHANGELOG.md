@@ -2,7 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
-## [0.6.0] - 2026-02-02
+## [Unreleased]
+
+### Added
+- **Professional Documentation Upgrade**: Re-structured `README.md` for better positioning and accurate showcases.
+- **Architectural Evolution Plan**: Added Phase 6 to `PLAN.md` documenting the transition toward a provider-agnostic Hexagonal Architecture.
+- **AI-Agnostic Vision**: Formally included OpenAI and Gemini as future supported providers in project goals.
+
+## [1.0.0] - 2026-04-21
 
 ### Added
 - **Demo Utility**: Created `DemoController` with a `/api/demo/reset` endpoint to facilitate repeatable demonstrations.
