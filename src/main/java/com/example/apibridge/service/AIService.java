@@ -36,12 +36,12 @@ public class AIService {
     }
 
     public AIResponse extractData(ExtractionRequest request) {
-        log.info("Starting AI extraction for text length: {}", request.getText().length());
-
         if (request == null || request.getText() == null || request.getText().trim().isEmpty()) {
-            log.error("Aborting: Input text is empty");
+            log.error("Aborting: Input text is empty or request is null");
             throw new IllegalArgumentException("Input text cannot be empty for AI extraction.");
         }
+
+        log.info("Starting AI extraction for text length: {}", request.getText().length());
 
         String prompt = "Extract the company name, date, and total amount from the following text. Respond ONLY with a valid JSON object containing the fields 'companyName', 'date', and 'totalAmount'. If a field is not found, use null.\n\nText: "
                 + request.getText();

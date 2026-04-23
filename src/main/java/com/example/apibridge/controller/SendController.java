@@ -7,6 +7,7 @@ import com.example.apibridge.service.AIService;
 import com.example.apibridge.service.EmailSenderService;
 import com.example.apibridge.service.ExtractionFetchService;
 import com.example.apibridge.service.SlackSenderService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,22 +20,16 @@ public class SendController {
     private final EmailSenderService emailSenderService;
     private final SlackSenderService slackSenderService;
     private final AIService aiService;
-    private final com.example.apibridge.repository.ExtractionRepository extractionRepository;
-    private final com.example.apibridge.mapper.ExtractionMapper extractionMapper;
 
     @Autowired
     public SendController(ExtractionFetchService extractionFetchService,
             EmailSenderService emailSenderService,
             SlackSenderService slackSenderService,
-            AIService aiService,
-            com.example.apibridge.repository.ExtractionRepository extractionRepository,
-            com.example.apibridge.mapper.ExtractionMapper extractionMapper) {
+            AIService aiService) {
         this.extractionFetchService = extractionFetchService;
         this.emailSenderService = emailSenderService;
         this.slackSenderService = slackSenderService;
         this.aiService = aiService;
-        this.extractionRepository = extractionRepository;
-        this.extractionMapper = extractionMapper;
     }
 
     @PostMapping("/email/{id}")
@@ -62,14 +57,14 @@ public class SendController {
     @io.swagger.v3.oas.annotations.Operation(summary = "Extract and send to email", description = "Extracts data from raw text using AI and sends it to an email.")
     @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "Extraction sent to email")
     @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "400", description = "Failed to extract data")
-    public ResponseEntity<String> sendAIExtractionToEmail(@RequestBody ExtractionRequest request,
+    public ResponseEntity<String> sendAIExtractionToEmail(@Valid @RequestBody ExtractionRequest request,
             @RequestParam String to) {
         AIResponse aiResponse = aiService.extractData(request);
         if (aiResponse == null)
             return ResponseEntity.badRequest().body("Failed to extract data from text.");
 
-        // Persist for demo purposes
-        extractionRepository.save(extractionMapper.toEntity(aiResponse));
+        // Persist via service
+        extractionFetchService.saveAIExtraction(aiResponse);
 
         emailSenderService.sendAIExtractionByEmail(to, aiResponse);
         return ResponseEntity.ok("Sent AI extraction to email");
@@ -80,13 +75,13 @@ public class SendController {
     @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "Extraction sent to Slack")
     @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "400", description = "Failed to extract data")
     @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "500", description = "Internal server error")
-    public ResponseEntity<String> sendAIExtractionToSlack(@RequestBody ExtractionRequest request) {
+    public ResponseEntity<String> sendAIExtractionToSlack(@Valid @RequestBody ExtractionRequest request) {
         AIResponse aiResponse = aiService.extractData(request);
         if (aiResponse == null)
             return ResponseEntity.badRequest().body("Failed to extract data from text.");
 
-        // Persist for demo purposes
-        extractionRepository.save(extractionMapper.toEntity(aiResponse));
+        // Persist via service
+        extractionFetchService.saveAIExtraction(aiResponse);
 
         slackSenderService.sendAIExtractionToSlack(aiResponse);
         return ResponseEntity.ok("Sent AI extraction to Slack");
@@ -96,13 +91,13 @@ public class SendController {
     @io.swagger.v3.oas.annotations.Operation(summary = "Extract data using AI", description = "Returns the structured JSON data extracted from raw text without sending it anywhere.")
     @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "Data extracted successfully")
     @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "400", description = "Failed to extract data")
-    public ResponseEntity<AIResponse> extractData(@RequestBody ExtractionRequest request) {
+    public ResponseEntity<AIResponse> extractData(@Valid @RequestBody ExtractionRequest request) {
         AIResponse aiResponse = aiService.extractData(request);
         if (aiResponse == null)
             return ResponseEntity.badRequest().build();
 
-        // Persist for demo purposes
-        extractionRepository.save(extractionMapper.toEntity(aiResponse));
+        // Persist via service
+        extractionFetchService.saveAIExtraction(aiResponse);
 
         return ResponseEntity.ok(aiResponse);
     }

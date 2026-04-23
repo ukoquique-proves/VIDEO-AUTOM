@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -14,6 +15,7 @@ import com.example.apibridge.service.SlackSenderService;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.client.MockRestServiceServer;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.web.client.RestTemplate;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -26,6 +28,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
+@ActiveProfiles("test")
 public class DemoStabilityTest {
 
     @Autowired
@@ -39,6 +42,9 @@ public class DemoStabilityTest {
 
     @Autowired
     private ObjectMapper objectMapper;
+
+    @Value("${groq.api.url}")
+    private String groqApiUrl;
 
     @MockBean
     private EmailSenderService emailSenderService;
@@ -69,7 +75,7 @@ public class DemoStabilityTest {
             // 2. Perform AI Extraction (Mocked Groq Call)
             String mockResponse = "{\"choices\":[{\"message\":{\"content\":\"{\\\"companyName\\\":\\\"DemoCorp-" + i
                     + "\\\",\\\"date\\\":\\\"2026-02-0" + i + "\\\",\\\"totalAmount\\\":" + (100.0 * i) + "}\"}}]}";
-            mockServer.expect(requestTo("https://api.groq.com/openai/v1/chat/completions"))
+            mockServer.expect(requestTo(groqApiUrl))
                     .andRespond(withSuccess(mockResponse, MediaType.APPLICATION_JSON));
 
             ExtractionRequest request = new ExtractionRequest();

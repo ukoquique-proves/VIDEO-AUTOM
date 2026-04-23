@@ -5,9 +5,23 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased]
 
 ### Added
+- **Unit Test Suite**: Introduced a comprehensive suite of 12 pure JUnit 5 tests covering core logic in `MessageFormatter`, `ExtractionMapper`, `SlackSenderService`, and `ExtractionFetchService`.
+- **Testable Architecture Beans**: Added a `Slack` bean to `RestConfig` to enable dependency injection for the Slack client to support constructor-based injection.
+- **Bean Validation**: Integrated `spring-boot-starter-validation` and implemented `@NotBlank` constraints on `ExtractionRequest` to ensure data integrity at the API boundary.
+- **Improved Test Isolation**: Added `application-test.yml` and utilized `@ActiveProfiles("test")` to decouple the test suite from production environment variables and external API keys.
+- **Robust Error Handling**: Updated `GlobalExceptionHandler` to provide structured JSON responses for validation failures, improving API consumer experience.
+
+### Changed
+- **Testable Architecture Refactoring**: Refactored `SlackSenderService` to use constructor-based dependency injection for the `Slack` client, decoupling it from static factory methods and enabling total isolation through Mockito.
+- **Improved Test Stability**: Fixed a locale-dependent formatting bug in `MessageFormatter` by enforcing `Locale.US`, ensuring consistent number formatting (decimal separators) regardless of the host environment.
+- **Performance Optimization**: Refactored `SlackSenderService` to initialize the Slack client once in the constructor, preventing resource leaks and aligning its lifecycle with the Spring bean.
+- **Architectural Refactoring**: Decoupled `SendController` from persistence logic by moving repository and mapper dependencies into `ExtractionFetchService`, strictly adhering to layered architecture principles.
 - **Professional Documentation Upgrade**: Re-structured `README.md` for better positioning and accurate showcases.
 - **Architectural Evolution Plan**: Added Phase 6 to `PLAN.md` documenting the transition toward a provider-agnostic Hexagonal Architecture.
 - **AI-Agnostic Vision**: Formally included OpenAI and Gemini as future supported providers in project goals.
+
+### Fixed
+- **Defensive Logic**: Corrected a potential `NullPointerException` in `AIService` by ensuring input validation occurs before any processing or logging.
 
 ## [1.0.0] - 2026-04-21
 

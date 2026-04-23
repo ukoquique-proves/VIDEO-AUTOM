@@ -1,5 +1,6 @@
 package com.example.apibridge.service;
 
+import com.example.apibridge.dto.AIResponse;
 import com.example.apibridge.dto.ExtractionResponse;
 import com.example.apibridge.exception.ResourceNotFoundException;
 import com.example.apibridge.mapper.ExtractionMapper;
@@ -19,6 +20,12 @@ public class ExtractionFetchService {
     public ExtractionFetchService(ExtractionRepository extractionRepository, ExtractionMapper extractionMapper) {
         this.extractionRepository = extractionRepository;
         this.extractionMapper = extractionMapper;
+    }
+
+    public ExtractionResponse saveAIExtraction(AIResponse aiResponse) {
+        Extraction extraction = extractionMapper.toEntity(aiResponse);
+        Extraction saved = extractionRepository.save(extraction);
+        return extractionMapper.toDto(saved);
     }
 
     public List<ExtractionResponse> fetchAllExtractions() {

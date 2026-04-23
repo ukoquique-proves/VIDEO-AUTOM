@@ -7,6 +7,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.client.MockRestServiceServer;
 import org.springframework.web.client.RestTemplate;
 
@@ -16,6 +18,7 @@ import static org.springframework.test.web.client.match.MockRestRequestMatchers.
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess;
 
 @SpringBootTest
+@ActiveProfiles("test")
 public class AIServiceIntegrationTest {
 
     @Autowired
@@ -23,6 +26,9 @@ public class AIServiceIntegrationTest {
 
     @Autowired
     private RestTemplate restTemplate;
+
+    @Value("${groq.api.url}")
+    private String groqApiUrl;
 
     private MockRestServiceServer mockServer;
 
@@ -35,7 +41,7 @@ public class AIServiceIntegrationTest {
     public void testExtractData() {
         String mockResponse = "{\"choices\":[{\"message\":{\"content\":\"{\\\"companyName\\\":\\\"ACME Corp\\\",\\\"date\\\":\\\"2023-01-01\\\",\\\"totalAmount\\\":123.45}\"}}]}";
 
-        mockServer.expect(requestTo("https://api.groq.com/openai/v1/chat/completions"))
+        mockServer.expect(requestTo(groqApiUrl))
                 .andRespond(withSuccess(mockResponse, MediaType.APPLICATION_JSON));
 
         ExtractionRequest request = new ExtractionRequest();

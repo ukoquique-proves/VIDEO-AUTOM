@@ -14,7 +14,7 @@ public class MessageFormatter {
     }
 
     private static String format(String company, String date, Double total) {
-        return String.format(
+        return String.format(java.util.Locale.US,
                 "🚀 *AI Extraction Complete*\n" +
                         "----------------------------\n" +
                         "🏢 *Company*: %s\n" +

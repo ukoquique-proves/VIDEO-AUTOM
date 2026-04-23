@@ -11,12 +11,14 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.context.ActiveProfiles;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
 @AutoConfigureMockMvc
+@ActiveProfiles("test")
 class SendControllerIntegrationTest {
     // --- TEST-ONLY: Mock beans for email and Slack sending ---
     // These replace the real implementations ONLY during tests.
@@ -37,7 +39,7 @@ class SendControllerIntegrationTest {
 
         @org.springframework.context.annotation.Bean
         public com.example.apibridge.service.SlackSenderService slackSenderService() {
-            return new com.example.apibridge.service.SlackSenderService("mock-webhook-url") {
+            return new com.example.apibridge.service.SlackSenderService("mock-webhook-url", com.slack.api.Slack.getInstance()) {
                 @Override
                 public void sendExtractionToSlack(com.example.apibridge.dto.ExtractionResponse extraction) {
                     System.out.printf("[MOCK SLACK] Message: %s\\n", MessageFormatter.formatExtraction(extraction));
