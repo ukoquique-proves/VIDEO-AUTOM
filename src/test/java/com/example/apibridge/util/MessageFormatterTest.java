@@ -20,7 +20,7 @@ public class MessageFormatterTest {
         assertTrue(result.contains("Test Corp"));
         assertTrue(result.contains("2023-10-10"));
         assertTrue(result.contains("$1500.00"));
-        assertTrue(result.contains("Extraction Result"));
+        assertTrue(result.contains("Logistics Data Extraction"));
     }
 
     @Test
@@ -35,6 +35,7 @@ public class MessageFormatterTest {
         assertTrue(result.contains("AI Logistics"));
         assertTrue(result.contains("2024-01-01"));
         assertTrue(result.contains("$250.75"));
+        assertTrue(result.contains("Logistics Data Extraction"));
     }
 
     @Test

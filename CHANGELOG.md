@@ -11,6 +11,8 @@ All notable changes to this project will be documented in this file.
 - **Rich Assets**: Added `invoice-routing.txt`, `status-delay.txt`, and `logistics-summary.txt` to `demo-assets/` for rapid stakeholder demonstrations.
 - **Urgency-Aware Notifications**: Updated `MessageFormatter` and notification services to visually flag urgent extraction results with clear warnings.
 - **Comprehensive Testing**: Added `testAdvancedShowcaseExtraction` to `AIServiceTest` and verified entire 31-test suite success.
+- **Robust Data Mapping**: Restored `@JsonProperty("totalAmount")` in `AIResponse` DTO to ensure reliable deserialization from LLM responses regardless of casing.
+- **Notification Consistency**: Unified all notification headers to "Logistics Data Extraction" across AI and database-driven workflows for a professional, cohesive user experience.
 
 ### Changed
 - **Roadmap Evolution**: Updated `PLAN.md` to include Phase 4 (Showcase Scenarios) as a strategic requirement before demo production.

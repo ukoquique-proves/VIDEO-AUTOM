@@ -14,7 +14,7 @@ public class MessageFormatter {
         if (Boolean.TRUE.equals(res.getIsUrgent())) {
             sb.append("⚠️ *URGENT ACTION REQUIRED*\n");
         }
-        sb.append("🚀 *AI Extraction Complete*\n");
+        sb.append("🚀 *Logistics Data Extraction*\n");
         sb.append("----------------------------\n");
         sb.append(String.format("🏢 *Company*: %s\n", res.getCompanyName() != null ? res.getCompanyName() : "Unknown"));
         sb.append(String.format("📅 *Date*: %s\n", res.getDate() != null ? res.getDate() : "N/A"));
@@ -34,7 +34,7 @@ public class MessageFormatter {
 
     private static String format(String company, String date, Double total) {
         return String.format(java.util.Locale.US,
-                "🚀 *Extraction Result*\n" +
+                "🚀 *Logistics Data Extraction*\n" +
                         "----------------------------\n" +
                         "🏢 *Company*: %s\n" +
                         "📅 *Date*: %s\n" +

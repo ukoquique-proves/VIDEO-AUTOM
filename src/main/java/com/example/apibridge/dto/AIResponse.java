@@ -8,6 +8,7 @@ public class AIResponse {
     @io.swagger.v3.oas.annotations.media.Schema(description = "Extracted date in YYYY-MM-DD format", example = "2023-01-01")
     private String date;
 
+    @com.fasterxml.jackson.annotation.JsonProperty("totalAmount")
     @io.swagger.v3.oas.annotations.media.Schema(description = "Extracted total amount", example = "500.00")
     private Double totalAmount;
 
