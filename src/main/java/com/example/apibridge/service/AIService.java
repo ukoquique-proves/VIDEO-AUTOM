@@ -43,7 +43,8 @@ public class AIService {
 
         log.info("Starting AI extraction for text length: {}", request.getText().length());
 
-        String prompt = "Extract the company name, date, and total amount from the following text. Respond ONLY with a valid JSON object containing the fields 'companyName', 'date', and 'totalAmount'. If a field is not found, use null.\n\nText: "
+        String prompt = "Extract data from the following logistics text. Respond ONLY with a valid JSON object containing the fields: 'companyName', 'date' (YYYY-MM-DD), 'totalAmount' (numeric), 'category' (e.g., Invoice, Status Update), 'status' (e.g., Delayed, Delivered, Pending), and 'isUrgent' (boolean).\n\n"
+                + "If a field is not found or not applicable, use null.\n\nText: "
                 + request.getText();
 
         HttpHeaders headers = new HttpHeaders();

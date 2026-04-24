@@ -75,6 +75,21 @@ public class AIServiceTest {
     }
 
     @Test
+    public void testAdvancedShowcaseExtraction() {
+        String mockResponse = groqResponse("{\"companyName\":\"Montevideo Port\",\"status\":\"DELAYED\",\"category\":\"Status Update\",\"isUrgent\":true}");
+        when(restTemplate.postForObject(eq(API_URL), any(HttpEntity.class), eq(String.class)))
+                .thenReturn(mockResponse);
+
+        AIResponse result = aiService.extractData(requestWith("Status: DELAYED at Montevideo Port. Urgent."));
+
+        assertNotNull(result);
+        assertEquals("Montevideo Port", result.getCompanyName());
+        assertEquals("DELAYED", result.getStatus());
+        assertEquals("Status Update", result.getCategory());
+        assertTrue(result.getIsUrgent());
+    }
+
+    @Test
     public void testNullFieldsInResponse() {
         String mockResponse = groqResponse("{\"companyName\":null,\"date\":null,\"totalAmount\":null}");
         when(restTemplate.postForObject(eq(API_URL), any(HttpEntity.class), eq(String.class)))

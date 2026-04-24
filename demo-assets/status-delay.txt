@@ -1,0 +1,11 @@
+TRACKING UPDATE: SHIPMENT #TRK-987654
+
+Current Status: DELAYED
+Location: Port of Montevideo, Uruguay
+Updated: 2026-04-23 14:00 UTC
+
+Notes: 
+The container is currently stuck due to unexpected labor issues at the terminal. 
+Expected departure is delayed by at least 48 hours. 
+
+URGENT: This shipment contains temperature-sensitive electronics. Please alert the client immediately.

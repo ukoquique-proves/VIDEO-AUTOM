@@ -1,0 +1,15 @@
+Subject: Invoice INV-2026-001 from Global Logistics Ltd
+Date: 2026-04-20
+To: Accounts Payable
+From: Global Logistics Ltd
+
+Dear Team,
+
+Please find attached our invoice for the transport services provided last week. 
+The total amount due is $1,450.00.
+
+Kindly ensure payment by the end of next week.
+
+Best regards,
+Finance Department
+Global Logistics Ltd

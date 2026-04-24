@@ -67,18 +67,29 @@ Demonstrate integration of old software outputs with new communication platforms
     - [x] Initialize Git and Push to GitHub.
     - [x] Verify live repository status.
 
-### Phase 4: Demo Preparation (Video Readiness)
+### Phase 4: Logistics Showcase Scenarios ✅ **Strategic Addition**
+- [ ] **Scenario 1: Supplier Invoice & Routing**
+    - [ ] Update AI logic to extract `category` and `priority`.
+    - [ ] Create `invoice-routing.txt` asset.
+- [ ] **Scenario 2: Status Updates & Delay Alerts**
+    - [ ] Update AI logic to detect `status` (e.g., Delayed) and flag `isUrgent`.
+    - [ ] Create `status-delay.txt` asset.
+- [ ] **Scenario 3: Insights & Summarization**
+    - [ ] Craft prompts for extracting high-level insights from messy logistics text.
+    - [ ] Create `logistics-summary.txt` asset.
+
+### Phase 5: Demo Preparation (Video Readiness)
 - [x] **Polish the "Happy Path"** ✅ **Must-Have**
     - [x] Robust `/api/send/ai/extract` (handle edge cases).
     - [x] Sample input assets (messy email/invoice text).
 - [x] **Demo Data & UX** ✅ **Must-Have**
     - [x] Database reset script for repeated runs.
     - [x] Professional Message templates (Email/Slack).
-- [x] **Observability** 🎯 **Nice-to-Have**
-    - [x] Real-time logging feedback for video.
-    - [x] Simple status dashboard.
+- [ ] **Observability** 🎯 **Nice-to-Have**
+    - [ ] Real-time logging feedback for video.
+    - [ ] Simple status dashboard.
 
-### Phase 5: Promotional Video Production
+### Phase 6: Promotional Video Production
 *Referenced from Promo-VIDEO script*
 - [ ] **Asset Preparation**
     - [ ] Scenario Setup: The Logistics Bottleneck (Messy text).
@@ -92,7 +103,7 @@ Demonstrate integration of old software outputs with new communication platforms
     - [ ] Design high-impact Thumbnail.
     - [ ] Global rollout (LinkedIn/Discord).
 
-### Phase 6: Architectural Evolution (Decoupling & Providers)
+### Phase 7: Architectural Evolution (Decoupling & Providers)
 - [ ] **Transition to Hexagonal Architecture** 🎯 **Strategic Goal**
     - [ ] Define `AIProvider` Port (Interface) in the domain layer.
     - [ ] Move Groq logic to an `AIAdapter` (Infrastructure layer).
