@@ -5,44 +5,37 @@ import com.example.apibridge.dto.ExtractionResponse;
 
 public class MessageFormatter {
 
-    public static String formatExtraction(ExtractionResponse extraction) {
-        return format(extraction.getCompanyName(), extraction.getDate(), extraction.getTotalAmount());
+    public static String formatExtraction(ExtractionResponse res) {
+        return format(res.getCompanyName(), res.getDate(), res.getTotalAmount(), 
+                      res.getCategory(), res.getStatus(), res.getIsUrgent());
     }
 
     public static String formatAIExtraction(AIResponse res) {
+        return format(res.getCompanyName(), res.getDate(), res.getTotalAmount(), 
+                      res.getCategory(), res.getStatus(), res.getIsUrgent());
+    }
+
+    private static String format(String company, String date, Double total, 
+                                String category, String status, Boolean isUrgent) {
         StringBuilder sb = new StringBuilder();
-        if (Boolean.TRUE.equals(res.getIsUrgent())) {
+        if (Boolean.TRUE.equals(isUrgent)) {
             sb.append("⚠️ *URGENT ACTION REQUIRED*\n");
         }
         sb.append("🚀 *Logistics Data Extraction*\n");
         sb.append("----------------------------\n");
-        sb.append(String.format("🏢 *Company*: %s\n", res.getCompanyName() != null ? res.getCompanyName() : "Unknown"));
-        sb.append(String.format("📅 *Date*: %s\n", res.getDate() != null ? res.getDate() : "N/A"));
-        sb.append(String.format(java.util.Locale.US, "💰 *Total Amount*: $%.2f\n", res.getTotalAmount() != null ? res.getTotalAmount() : 0.0));
-        
-        if (res.getCategory() != null) {
-            sb.append(String.format("📂 *Category*: %s\n", res.getCategory()));
+        sb.append(String.format("🏢 *Company*: %s\n", company != null ? company : "Unknown"));
+        sb.append(String.format("📅 *Date*: %s\n", date != null ? date : "N/A"));
+        sb.append(String.format(java.util.Locale.US, "💰 *Total Amount*: $%.2f\n", total != null ? total : 0.0));
+
+        if (category != null) {
+            sb.append(String.format("📂 *Category*: %s\n", category));
         }
-        if (res.getStatus() != null) {
-            sb.append(String.format("🔄 *Status*: %s\n", res.getStatus()));
+        if (status != null) {
+            sb.append(String.format("🔄 *Status*: %s\n", status));
         }
-        
+
         sb.append("----------------------------\n");
         sb.append("Processed by The API Bridge");
         return sb.toString();
-    }
-
-    private static String format(String company, String date, Double total) {
-        return String.format(java.util.Locale.US,
-                "🚀 *Logistics Data Extraction*\n" +
-                        "----------------------------\n" +
-                        "🏢 *Company*: %s\n" +
-                        "📅 *Date*: %s\n" +
-                        "💰 *Total Amount*: $%.2f\n" +
-                        "----------------------------\n" +
-                        "Processed by The API Bridge",
-                company != null ? company : "Unknown",
-                date != null ? date : "N/A",
-                total != null ? total : 0.0);
     }
 }

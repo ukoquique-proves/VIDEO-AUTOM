@@ -3,7 +3,6 @@ package com.example.apibridge.controller;
 import com.example.apibridge.repository.ExtractionRepository;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +15,6 @@ public class DemoController {
 
     private final ExtractionRepository repository;
 
-    @Autowired
     public DemoController(ExtractionRepository repository) {
         this.repository = repository;
     }

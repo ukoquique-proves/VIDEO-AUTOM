@@ -24,6 +24,21 @@ public class MessageFormatterTest {
     }
 
     @Test
+    public void testFormatExtractionWithRichFields() {
+        ExtractionResponse res = new ExtractionResponse();
+        res.setCompanyName("Rich Corp");
+        res.setCategory("Invoice");
+        res.setStatus("DELAYED");
+        res.setIsUrgent(true);
+
+        String result = MessageFormatter.formatExtraction(res);
+
+        assertTrue(result.contains("URGENT ACTION REQUIRED"));
+        assertTrue(result.contains("Invoice"));
+        assertTrue(result.contains("DELAYED"));
+    }
+
+    @Test
     public void testFormatAIExtraction() {
         AIResponse aiResponse = new AIResponse();
         aiResponse.setCompanyName("AI Logistics");

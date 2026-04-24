@@ -22,6 +22,8 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 - **Roadmap Evolution**: Updated `PLAN.md` to include Phase 4 (Showcase Scenarios) as a strategic requirement before demo production.
+- **Unified Notification Formatting**: Refactored `MessageFormatter` so both the AI path and the DB retrieval path use a single `format()` method, ensuring `category`, `status`, and `isUrgent` are always included in email/Slack messages regardless of how data was sourced.
+- **Exception Handler Ordering**: Reordered handlers in `GlobalExceptionHandler` from most-specific to most-generic (`MethodArgumentNotValidException` → `ResourceNotFoundException` → `NotificationException` → `IllegalArgumentException` → `RuntimeException` → `Exception`) to eliminate the misleading dead-path appearance and align with Spring convention.
 - **Testable Architecture Refactoring**: Refactored `SlackSenderService` to use constructor-based dependency injection for the `Slack` client, decoupling it from static factory methods and enabling total isolation through Mockito.
 - **Improved Test Stability**: Fixed a locale-dependent formatting bug in `MessageFormatter` by enforcing `Locale.US`, ensuring consistent number formatting (decimal separators) regardless of the host environment.
 - **Performance Optimization**: Refactored `SlackSenderService` to initialize the Slack client once in the constructor, preventing resource leaks and aligning its lifecycle with the Spring bean.

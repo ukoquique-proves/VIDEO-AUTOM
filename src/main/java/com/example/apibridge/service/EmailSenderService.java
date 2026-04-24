@@ -3,7 +3,6 @@ package com.example.apibridge.service;
 import com.example.apibridge.dto.AIResponse;
 import com.example.apibridge.dto.ExtractionResponse;
 import com.example.apibridge.util.MessageFormatter;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -14,7 +13,6 @@ public class EmailSenderService {
     private final JavaMailSender mailSender;
     private final Environment env;
 
-    @Autowired
     public EmailSenderService(JavaMailSender mailSender, Environment env) {
         this.mailSender = mailSender;
         this.env = env;

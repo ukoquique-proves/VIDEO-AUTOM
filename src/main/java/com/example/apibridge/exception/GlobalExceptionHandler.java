@@ -24,6 +24,14 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(400).body(error);
     }
 
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ResponseEntity<Map<String, String>> handleResourceNotFoundException(ResourceNotFoundException e) {
+        Map<String, String> error = new HashMap<>();
+        error.put("error", "Not Found");
+        error.put("message", e.getMessage());
+        return ResponseEntity.status(404).body(error);
+    }
+
     @ExceptionHandler(NotificationException.class)
     public ResponseEntity<Map<String, String>> handleNotificationException(NotificationException e) {
         Map<String, String> error = new HashMap<>();
@@ -46,14 +54,6 @@ public class GlobalExceptionHandler {
         error.put("error", "Internal Server Error");
         error.put("message", e.getMessage());
         return ResponseEntity.status(500).body(error);
-    }
-
-    @ExceptionHandler(ResourceNotFoundException.class)
-    public ResponseEntity<Map<String, String>> handleResourceNotFoundException(ResourceNotFoundException e) {
-        Map<String, String> error = new HashMap<>();
-        error.put("error", "Not Found");
-        error.put("message", e.getMessage());
-        return ResponseEntity.status(404).body(error);
     }
 
     @ExceptionHandler(Exception.class)
