@@ -8,7 +8,6 @@ import com.example.apibridge.service.EmailSenderService;
 import com.example.apibridge.service.ExtractionFetchService;
 import com.example.apibridge.service.SlackSenderService;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,7 +20,6 @@ public class SendController {
     private final SlackSenderService slackSenderService;
     private final AIService aiService;
 
-    @Autowired
     public SendController(ExtractionFetchService extractionFetchService,
             EmailSenderService emailSenderService,
             SlackSenderService slackSenderService,

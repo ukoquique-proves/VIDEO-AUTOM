@@ -12,6 +12,9 @@ public class ExtractionMapper {
         dto.setCompanyName(extraction.getCompanyName());
         dto.setDate(extraction.getDate());
         dto.setTotalAmount(extraction.getTotalAmount());
+        dto.setCategory(extraction.getCategory());
+        dto.setStatus(extraction.getStatus());
+        dto.setIsUrgent(extraction.getIsUrgent());
         return dto;
     }
 
@@ -20,6 +23,9 @@ public class ExtractionMapper {
         extraction.setCompanyName(aiResponse.getCompanyName());
         extraction.setDate(aiResponse.getDate());
         extraction.setTotalAmount(aiResponse.getTotalAmount());
+        extraction.setCategory(aiResponse.getCategory());
+        extraction.setStatus(aiResponse.getStatus());
+        extraction.setIsUrgent(aiResponse.getIsUrgent());
         return extraction;
     }
 }

@@ -14,6 +14,15 @@ public class ExtractionResponse {
     @io.swagger.v3.oas.annotations.media.Schema(description = "Total amount of the transaction", example = "123.45")
     private Double totalAmount;
 
+    @io.swagger.v3.oas.annotations.media.Schema(description = "Category of the document", example = "Invoice")
+    private String category;
+
+    @io.swagger.v3.oas.annotations.media.Schema(description = "Status mentioned in text", example = "Delayed")
+    private String status;
+
+    @io.swagger.v3.oas.annotations.media.Schema(description = "Whether the situation is urgent", example = "true")
+    private Boolean isUrgent;
+
     public Long getId() {
         return id;
     }
@@ -44,5 +53,29 @@ public class ExtractionResponse {
 
     public void setTotalAmount(Double totalAmount) {
         this.totalAmount = totalAmount;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public Boolean getIsUrgent() {
+        return isUrgent;
+    }
+
+    public void setIsUrgent(Boolean urgent) {
+        isUrgent = urgent;
     }
 }

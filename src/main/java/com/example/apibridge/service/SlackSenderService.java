@@ -6,7 +6,6 @@ import com.example.apibridge.exception.NotificationException;
 import com.example.apibridge.util.MessageFormatter;
 import com.slack.api.Slack;
 import com.slack.api.webhook.Payload;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +14,6 @@ public class SlackSenderService {
     private final String slackWebhookUrl;
     private final Slack slack;
 
-    @Autowired
     public SlackSenderService(@Value("${slack.webhook.url}") String slackWebhookUrl, Slack slack) {
         this.slackWebhookUrl = slackWebhookUrl;
         this.slack = slack;

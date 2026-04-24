@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Logistics Hub | Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --accent: #a855f7;
+            --bg: #0f172a;
+            --card-bg: rgba(30, 41, 59, 0.7);
+            --text: #f1f5f9;
+            --text-dim: #94a3b8;
+            --danger: #ef4444;
+            --success: #10b981;
+            --warning: #f59e0b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--bg);
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.15) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(168, 85, 247, 0.15) 0px, transparent 50%);
+            color: var(--text);
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 3rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 600;
+        }
+
+        .status-pill {
+            background: var(--card-bg);
+            padding: 0.5rem 1rem;
+            border-radius: 2rem;
+            border: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.875rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .pulse {
+            width: 8px;
+            height: 8px;
+            background: var(--success);
+            border-radius: 50%;
+            box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            padding: 1.5rem;
+            border-radius: 1rem;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .stat-label {
+            color: var(--text-dim);
+            font-size: 0.875rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .table-container {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            border-radius: 1rem;
+            border: 1px solid rgba(255,255,255,0.1);
+            overflow: hidden;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        th {
+            background: rgba(255,255,255,0.05);
+            padding: 1rem 1.5rem;
+            font-weight: 600;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.05em;
+        }
+
+        td {
+            padding: 1.25rem 1.5rem;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:hover td {
+            background: rgba(255,255,255,0.02);
+        }
+
+        .badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .badge-urgent { background: rgba(239, 68, 68, 0.2); color: var(--danger); border: 1px solid var(--danger); }
+        .badge-delayed { background: rgba(245, 158, 11, 0.2); color: var(--warning); border: 1px solid var(--warning); }
+        .badge-pending { background: rgba(245, 158, 11, 0.2); color: var(--warning); border: 1px solid var(--warning); }
+        .badge-success { background: rgba(16, 185, 129, 0.2); color: var(--success); border: 1px solid var(--success); }
+        .badge-normal { background: rgba(99, 102, 241, 0.2); color: var(--primary); border: 1px solid var(--primary); }
+
+        .empty-state {
+            padding: 4rem;
+            text-align: center;
+            color: var(--text-dim);
+        }
+
+        footer {
+            margin-top: 4rem;
+            text-align: center;
+            color: var(--text-dim);
+            font-size: 0.875rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div>
+                <h1>AI Logistics Hub</h1>
+                <p style="color: var(--text-dim); margin-top: 0.5rem;">Intelligent Document Extraction Pipeline</p>
+            </div>
+            <div class="status-pill">
+                <div class="pulse"></div>
+                Live Monitoring Active
+            </div>
+        </header>
+
+        <div class="grid">
+            <div class="stat-card">
+                <div class="stat-label">Total Extractions</div>
+                <div class="stat-value" id="totalCount">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Urgent Alerts</div>
+                <div class="stat-value" id="urgentCount" style="color: var(--danger);">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">System Health</div>
+                <div class="stat-value" style="color: var(--success);">Optimal</div>
+            </div>
+        </div>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Company</th>
+                        <th>Category</th>
+                        <th>Amount</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="extractionTable">
+                    <!-- Data will be injected here -->
+                </tbody>
+            </table>
+            <div id="loading" class="empty-state">
+                Loading extraction data...
+            </div>
+        </div>
+
+        <footer>
+            &copy; 2026 AI Logistics Automation Hub &bull; Built for Professional Logistics Operations
+        </footer>
+    </div>
+
+    <script>
+        async function fetchExtractions() {
+            try {
+                const response = await fetch('/api/extractions');
+                const data = await response.json();
+                updateTable(data);
+            } catch (error) {
+                console.error('Error fetching extractions:', error);
+            }
+        }
+
+        function updateTable(extractions) {
+            const tbody = document.getElementById('extractionTable');
+            const loading = document.getElementById('loading');
+            const totalCount = document.getElementById('totalCount');
+            const urgentCount = document.getElementById('urgentCount');
+
+            if (extractions.length === 0) {
+                tbody.innerHTML = '';
+                loading.style.display = 'block';
+                loading.innerText = 'No extractions found in database.';
+                return;
+            }
+
+            loading.style.display = 'none';
+            tbody.innerHTML = '';
+            
+            let urgents = 0;
+            
+            extractions.reverse().forEach(ex => {
+                if (ex.isUrgent) urgents++;
+                
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>#${ex.id}</td>
+                    <td style="font-weight: 600;">${ex.companyName || 'Unknown'}</td>
+                    <td>${ex.category || 'N/A'}</td>
+                    <td>$${(ex.totalAmount || 0).toFixed(2)}</td>
+                    <td><span class="badge ${getStatusClass(ex)}">${ex.status || 'Processed'}</span></td>
+                    <td>
+                        ${ex.isUrgent ? '<span class="badge badge-urgent">URGENT</span>' : '<span style="color:var(--text-dim)">-</span>'}
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+
+            totalCount.innerText = extractions.length;
+            urgentCount.innerText = urgents;
+        }
+
+        function getStatusClass(ex) {
+            if (!ex.status) return 'badge-normal';
+            const s = ex.status.toUpperCase();
+            if (s.includes('DELAYED')) return 'badge-delayed';
+            if (s.includes('DELIVERED') || s.includes('COMPLETED') || s.includes('SUCCESS')) return 'badge-success';
+            if (s.includes('PENDING') || s.includes('WARNING')) return 'badge-pending';
+            return 'badge-normal';
+        }
+
+        // Poll every 5 seconds
+        fetchExtractions();
+        setInterval(fetchExtractions, 5000);
+    </script>
+</body>
+</html>

@@ -127,6 +127,12 @@ The application will be available at `http://localhost:8080`.
 
 ---
 
+## 🚀 Showcase Scenarios
+
+Explore real-world logistics automation stories (Delayed Shipment Alerts, Invoice Routing, and Operations Digests) in our [Showcase Guide (DEMO.md)](DEMO.md).
+
+---
+
 ## API Documentation
 
 Explore and test endpoints via **Swagger UI**:

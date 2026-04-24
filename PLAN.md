@@ -68,15 +68,17 @@ Demonstrate integration of old software outputs with new communication platforms
     - [x] Verify live repository status.
 
 ### Phase 4: Logistics Showcase Scenarios ✅ **Strategic Addition**
-- [ ] **Scenario 1: Supplier Invoice & Routing**
-    - [ ] Update AI logic to extract `category` and `priority`.
-    - [ ] Create `invoice-routing.txt` asset.
-- [ ] **Scenario 2: Status Updates & Delay Alerts**
-    - [ ] Update AI logic to detect `status` (e.g., Delayed) and flag `isUrgent`.
-    - [ ] Create `status-delay.txt` asset.
-- [ ] **Scenario 3: Insights & Summarization**
-    - [ ] Craft prompts for extracting high-level insights from messy logistics text.
-    - [ ] Create `logistics-summary.txt` asset.
+- [x] **Scenario 1: Supplier Invoice & Routing**
+    - [x] Update AI logic to extract `category` and `priority`.
+    - [x] Create `invoice-routing.txt` asset.
+- [x] **Scenario 2: Status Updates & Delay Alerts**
+    - [x] Update AI logic to detect `status` (e.g., Delayed) and flag `isUrgent`.
+    - [x] Create `status-delay.txt` asset.
+- [x] **Scenario 3: Insights & Summarization**
+    - [x] Craft prompts for extracting high-level insights from messy logistics text.
+    - [x] Create `logistics-summary.txt` asset.
+- [x] **Storytelling & Documentation**
+    - [x] Create `DEMO.md` with concrete business cases and cURL commands.
 
 ### Phase 5: Demo Preparation (Video Readiness)
 - [x] **Polish the "Happy Path"** ✅ **Must-Have**
@@ -85,9 +87,9 @@ Demonstrate integration of old software outputs with new communication platforms
 - [x] **Demo Data & UX** ✅ **Must-Have**
     - [x] Database reset script for repeated runs.
     - [x] Professional Message templates (Email/Slack).
-- [ ] **Observability** 🎯 **Nice-to-Have**
-    - [ ] Real-time logging feedback for video.
-    - [ ] Simple status dashboard.
+- [x] **Observability** 🎯 **Nice-to-Have**
+    - [x] Real-time logging feedback for video.
+    - [x] Simple status dashboard (`/index.html`).
 
 ### Phase 6: Promotional Video Production
 *Referenced from Promo-VIDEO script*

@@ -9,9 +9,15 @@ All notable changes to this project will be documented in this file.
 - **Enhanced AI Model**: Expanded `AIResponse` DTO with `status`, `category`, and `isUrgent` fields to support specialized logistics logic.
 - **Advanced Prompting**: Upgraded `AIService` system prompts to perform intelligent categorization and urgency detection.
 - **Rich Assets**: Added `invoice-routing.txt`, `status-delay.txt`, and `logistics-summary.txt` to `demo-assets/` for rapid stakeholder demonstrations.
+- **Storytelling Documentation**: Created `DEMO.md` which translates technical features into business-value stories with runnable examples.
 - **Urgency-Aware Notifications**: Updated `MessageFormatter` and notification services to visually flag urgent extraction results with clear warnings.
 - **Comprehensive Testing**: Added `testAdvancedShowcaseExtraction` to `AIServiceTest` and verified entire 31-test suite success.
+- **Architectural Cleanup**: Standardized constructor injection by removing redundant `@Autowired` annotations from all Controllers and Services, aligning with modern Spring Boot standards.
 - **Robust Data Mapping**: Restored `@JsonProperty("totalAmount")` in `AIResponse` DTO to ensure reliable deserialization from LLM responses regardless of casing.
+- **Observability Dashboard**: Developed a real-time, glassmorphic monitoring dashboard (`/index.html`) featuring semantic status badges and live extraction statistics.
+- **Enhanced Data Persistence**: Updated the `Extraction` entity, DTOs, and Mapper to fully persist and expose new logistics fields (`status`, `category`, `isUrgent`).
+- **Semantic Status UI**: Implemented an intelligent status-to-color mapping system in the dashboard (Delivered → Green, Pending → Yellow, Delayed → Orange) for instant visual feedback.
+- **New Retrieval API**: Introduced `ExtractionController` to provide a dedicated endpoint for fetching stored extraction records.
 - **Notification Consistency**: Unified all notification headers to "Logistics Data Extraction" across AI and database-driven workflows for a professional, cohesive user experience.
 
 ### Changed
