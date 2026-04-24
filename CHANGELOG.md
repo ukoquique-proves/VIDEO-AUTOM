@@ -5,13 +5,15 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased]
 
 ### Added
-- **Unit Test Suite**: Introduced a comprehensive suite of 12 pure JUnit 5 tests covering core logic in `MessageFormatter`, `ExtractionMapper`, `SlackSenderService`, and `ExtractionFetchService`.
-- **Testable Architecture Beans**: Added a `Slack` bean to `RestConfig` to enable dependency injection for the Slack client to support constructor-based injection.
-- **Bean Validation**: Integrated `spring-boot-starter-validation` and implemented `@NotBlank` constraints on `ExtractionRequest` to ensure data integrity at the API boundary.
-- **Improved Test Isolation**: Added `application-test.yml` and utilized `@ActiveProfiles("test")` to decouple the test suite from production environment variables and external API keys.
-- **Robust Error Handling**: Updated `GlobalExceptionHandler` to provide structured JSON responses for validation failures, improving API consumer experience.
+- **Logistics Showcase Scenarios**: Implemented advanced extraction scenarios for Supplier Invoices, Shipment Delays, and Daily Ops Logs.
+- **Enhanced AI Model**: Expanded `AIResponse` DTO with `status`, `category`, and `isUrgent` fields to support specialized logistics logic.
+- **Advanced Prompting**: Upgraded `AIService` system prompts to perform intelligent categorization and urgency detection.
+- **Rich Assets**: Added `invoice-routing.txt`, `status-delay.txt`, and `logistics-summary.txt` to `demo-assets/` for rapid stakeholder demonstrations.
+- **Urgency-Aware Notifications**: Updated `MessageFormatter` and notification services to visually flag urgent extraction results with clear warnings.
+- **Comprehensive Testing**: Added `testAdvancedShowcaseExtraction` to `AIServiceTest` and verified entire 31-test suite success.
 
 ### Changed
+- **Roadmap Evolution**: Updated `PLAN.md` to include Phase 4 (Showcase Scenarios) as a strategic requirement before demo production.
 - **Testable Architecture Refactoring**: Refactored `SlackSenderService` to use constructor-based dependency injection for the `Slack` client, decoupling it from static factory methods and enabling total isolation through Mockito.
 - **Improved Test Stability**: Fixed a locale-dependent formatting bug in `MessageFormatter` by enforcing `Locale.US`, ensuring consistent number formatting (decimal separators) regardless of the host environment.
 - **Performance Optimization**: Refactored `SlackSenderService` to initialize the Slack client once in the constructor, preventing resource leaks and aligning its lifecycle with the Spring bean.
