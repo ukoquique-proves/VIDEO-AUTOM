@@ -40,6 +40,8 @@ All notable changes to this project will be documented in this file.
 - **Docker Runtime Compatibility**: Updated `Dockerfile` to copy `demo-assets/` into the image and corrected the artifact copy path to `target/autom-hub-0.0.1-SNAPSHOT.jar`.
 - **Project Naming Consistency**: Replaced legacy "API Bridge" branding with "AI Logistics Automation Hub" across documentation, OpenAPI metadata, utility output text, and verification scripts.
 - **Contribution Guidelines Upgrade**: Rewrote `CONTRIBUTING.md` with professional standards for architecture, branching, commit style, testing flow, and contribution quality.
+- **Service-Layer Boundary Enforcement**: Refactored `DemoController` to remove direct repository access and route reset operations through `ExtractionFetchService` via `clearAll()`.
+- **ObjectMapper Centralization**: Moved `ObjectMapper` instantiation out of `AIService` and into `RestConfig` as a Spring bean for centralized JSON configuration.
 
 ### Fixed
 - **Defensive Logic**: Corrected a potential `NullPointerException` in `AIService` by ensuring input validation occurs before any processing or logging.
@@ -47,6 +49,7 @@ All notable changes to this project will be documented in this file.
 - **Dashboard Feedback Accuracy**: Updated the demo run button flow to display the backend response message and refresh extraction data immediately after populate attempts.
 - **Demo Asset Data Quality**: Corrected `demo-assets/sample-invoice.txt` amount from `,450.50` to `$1,450.50` to remove extraction ambiguity in live demos.
 - **Serialization Stability**: Locked `ExtractionResponse` output field names with explicit Jackson annotations (`companyName`, `date`, `totalAmount`, `category`, `status`, `isUrgent`) to prevent silent frontend breakage from future naming-strategy changes.
+- **Credential Exposure Cleanup**: Removed embedded GitHub token from local git remote configuration and reset `origin` to a token-free repository URL.
 
 ## [1.0.0] - 2026-04-21
 

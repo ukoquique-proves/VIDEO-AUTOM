@@ -2,7 +2,6 @@ package com.example.apibridge.controller;
 
 import com.example.apibridge.dto.AIResponse;
 import com.example.apibridge.dto.ExtractionRequest;
-import com.example.apibridge.repository.ExtractionRepository;
 import com.example.apibridge.service.AIService;
 import com.example.apibridge.service.ExtractionFetchService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -28,12 +27,10 @@ import java.util.stream.Stream;
 public class DemoController {
 
     private static final Logger log = LoggerFactory.getLogger(DemoController.class);
-    private final ExtractionRepository repository;
     private final AIService aiService;
     private final ExtractionFetchService extractionFetchService;
 
-    public DemoController(ExtractionRepository repository, AIService aiService, ExtractionFetchService extractionFetchService) {
-        this.repository = repository;
+    public DemoController(AIService aiService, ExtractionFetchService extractionFetchService) {
         this.aiService = aiService;
         this.extractionFetchService = extractionFetchService;
     }
@@ -41,7 +38,7 @@ public class DemoController {
     @PostMapping("/reset")
     @Operation(summary = "Reset Database", description = "Deletes all extractions and ensures a clean state for the demo.")
     public ResponseEntity<String> resetDatabase() {
-        repository.deleteAll();
+        extractionFetchService.clearAll();
         return ResponseEntity.ok("Database reset successful. Ready for demo!");
     }
 

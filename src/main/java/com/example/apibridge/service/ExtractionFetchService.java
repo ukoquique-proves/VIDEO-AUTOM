@@ -31,6 +31,10 @@ public class ExtractionFetchService {
         return extractions.stream().map(extractionMapper::toDto).collect(Collectors.toList());
     }
 
+    public void clearAll() {
+        extractionRepository.deleteAll();
+    }
+
     public ExtractionResponse fetchExtractionById(Long id) {
         return extractionRepository.findById(id)
                 .map(extractionMapper::toDto)
