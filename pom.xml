@@ -8,6 +8,7 @@
     <packaging>jar</packaging>
     <name>AI Logistics Automation Hub</name>
     <description>AI-driven automation pipeline for the logistics industry.</description>
+    <url>https://github.com/HectorCorbellini/ai-logistics-automation-hub</url>
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>

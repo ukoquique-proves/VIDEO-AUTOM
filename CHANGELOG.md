@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased]
 
 ### Added
+- **Professional Documentation Suite**: Consolidated all project metadata into a clean `docs/` directory, including a new `roadmap.md`, `ai-integration.md`, `demo-guide.md`, `troubleshooting.md`, and `review-notes.md`.
+- **Internal Development Logs**: Moved session-specific logs and developer notes to `.github/INTERNAL_LOGS.md` to maintain a professional, visitor-facing `docs/` folder.
+
+### Changed
+- **Swagger UI Standardization**: Standardized all Swagger UI references to the consistent `/swagger-ui/index.html` path and updated `application.yml` to ensure technical alignment.
+- **README Transparency**: Refined the README to clearly distinguish between the active Groq integration and planned OpenAI/Gemini support, including updated architecture diagrams.
+- **Project Metadata Accuracy**: Corrected malformed tags in `pom.xml` and updated the project URL to the official repository.
+
+## [1.1.0] - 2026-04-25
+
+### Added
 - **Logistics Showcase Scenarios**: Implemented advanced extraction scenarios for Supplier Invoices, Shipment Delays, and Daily Ops Logs.
 - **Enhanced AI Model**: Expanded `AIResponse` DTO with `status`, `category`, and `isUrgent` fields to support specialized logistics logic.
 - **Advanced Prompting**: Upgraded `AIService` system prompts to perform intelligent categorization and urgency detection.

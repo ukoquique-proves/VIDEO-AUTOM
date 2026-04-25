@@ -23,6 +23,10 @@ spring:
           starttls:
             enable: true
 
+springdoc:
+  swagger-ui:
+    path: /swagger-ui/index.html
+
 slack:
   webhook:
     url: ${SLACK_WEBHOOK_URL}

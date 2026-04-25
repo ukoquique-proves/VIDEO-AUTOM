@@ -1,0 +1,22 @@
+# Internal Development Logs
+
+This file contains historical logs and development thoughts from past sessions.
+
+## 2026-04-25: Documentation Cleanup Session
+
+- Identified inconsistencies between README claims and implementation (Multi-provider support).
+- Flagged non-portable paths in `GROQ.md`.
+- Consolidated internal notes and roadmap into the `docs/` directory.
+- Professionalized "Junior-level" review comments to provide better architectural guidance.
+
+---
+
+### Previous Context (Logistics Hub Analysis)
+
+The AI Logistics Automation Hub is a professional-grade backend service built with Java 17 and Spring Boot 3. It serves as an intelligent pipeline that converts unstructured logistics data into structured JSON using LLM APIs.
+
+- **Core Functionality**: Uses AI to extract key fields like companyName, totalAmount, status, and isUrgent from raw text.
+- **Integrations**: Automatically dispatches extracted data to Slack and Email.
+- **Architecture**: Follows a clean Layered Architecture (Controller, Service, Repository).
+- **Tech Stack**: Spring Data JPA, H2, SpringDoc, Dotenv.
+- **Demo-Ready**: Includes pre-configured assets in demo-assets/.

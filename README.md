@@ -2,7 +2,7 @@
 
 ![Java CI with Maven](https://github.com/HectorCorbellini/ai-logistics-automation-hub/actions/workflows/maven.yml/badge.svg)
 
-> **Intelligent Document-to-JSON Extractor** | Java 17 · Spring Boot 3 · Layered Architecture · Groq / OpenAI / Gemini
+> **Intelligent Document-to-JSON Extractor** | Java 17 · Spring Boot 3 · Layered Architecture · Groq AI
 
 A professional-grade backend service that converts unstructured documents (invoices, emails, reports) into structured JSON using LLM APIs. Built for operations teams that need reliable, auditable data extraction without vendor lock-in.
 
@@ -37,27 +37,27 @@ graph LR
  invoices / emails / text] -->|REST API| B[Controller Layer]
     B --> C[Service Layer]
     C -->|Provider Selection| D{LLM Adapter}
-    D -->|Groq| E[Groq API]
-    D -->|OpenAI| F[OpenAI API]
-    D -->|Gemini| G[Gemini API]
-    E & F & G -->|Structured Response| C
+    D -->|Active| E[Groq API]
+    D -.->|Planned| F[OpenAI API]
+    D -.->|Planned| G[Gemini API]
+    E -->|Structured Response| C
     C -->|JSON Output| H[Email / Slack / REST]
 ```
 
 1. **Input** — Raw text is sent to the REST endpoint.
 2. **Service Layer** — Applies extraction rules and coordinates with the selected AI provider.
-3. **LLM Adapter** — Sends a structured prompt to Groq, OpenAI, or Gemini and receives pure JSON.
+3. **LLM Adapter** — Sends a structured prompt to Groq (with planned support for OpenAI and Gemini) and receives pure JSON.
 4. **Output** — Validated JSON is persisted in H2, dispatched to Email/Slack, or returned via REST.
 
 ---
 
 ## Features
 
-- **AI-Powered Data Extraction** — Uses Groq AI (with OpenAI and Gemini support) to intelligently parse and structure raw text (Company, Date, Amount).
+- **AI-Powered Data Extraction** — Uses Groq AI to intelligently parse and structure raw text (Company, Date, Amount). Support for OpenAI and Gemini is planned.
 - **Email Integration** — Automatically sends formatted extraction results via SMTP.
 - **Slack Integration** — Posts extracted results to a configured Slack channel via Webhook.
 - **RESTful API** — Clean endpoints for extraction, notification dispatch, and demo resets.
-- **Interactive API Docs** — Swagger UI available at `/swagger-ui.html` for live testing.
+- **Interactive API Docs** — Swagger UI available at `/swagger-ui/index.html` for live testing.
 - **Containerized** — Includes a `Dockerfile` for easy deployment and scaling.
 
 ---
@@ -81,19 +81,26 @@ While pragmatic, the project respects core **Clean Architecture** principles:
 
 ---
 
-## The Nearshore Advantage
+## 🚀 Showcase Scenarios
 
-Developed by **Héctor Corbellini** — based in **Uruguay (EST/EDT timezone)**. This project demonstrates the high-bandwidth collaboration and technical alignment possible with North American partners.
-
-[LinkedIn](https://www.linkedin.com/in/hector-corbellini/) · [GitHub Portfolio](https://github.com/HectorCorbellini)
+Explore real-world logistics automation stories (Delayed Shipment Alerts, Invoice Routing, and Operations Digests) in our [Showcase Guide (docs/demo-guide.md)](docs/demo-guide.md).
 
 ---
 
-## Prerequisites
+## 📚 Documentation
 
-- Java 17
-- Maven 3.8+
-- A valid **Groq API key** (OpenAI or Gemini also supported)
+Detailed documentation and guides are available in the [docs/](docs/) folder:
+- [Roadmap](docs/roadmap.md) — Project phases and progress.
+- [AI Integration Guide](docs/ai-integration.md) — Technical details on LLM usage.
+- [Troubleshooting](docs/troubleshooting.md) — Common issues and fixes.
+- [Review Notes](docs/review-notes.md) — Architectural best practices and QC.
+
+---
+
+## API Documentation
+
+Explore and test endpoints via **Swagger UI**:
+- [http://localhost:8080/swagger-ui/index.html](http://localhost:8080/swagger-ui/index.html)
 
 ---
 
@@ -124,19 +131,6 @@ docker run -d -p 8080:8080 --name ai-logistics-hub ai-logistics-hub:latest
 ```
 
 The application will be available at `http://localhost:8080`.
-
----
-
-## 🚀 Showcase Scenarios
-
-Explore real-world logistics automation stories (Delayed Shipment Alerts, Invoice Routing, and Operations Digests) in our [Showcase Guide (DEMO.md)](DEMO.md).
-
----
-
-## API Documentation
-
-Explore and test endpoints via **Swagger UI**:
-- [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)
 
 ---
 
