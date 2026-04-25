@@ -22,7 +22,7 @@ Spring Boot automation system with Groq AI integration.
 **SAST/DAST:** Not explicitly configured in this repository.
 
 ## 🚀 Security Roadmap
-1. **Docker hardening**: Optimize the base image to reduce attack surface (e.g., use `eclipse-temurin:17-jre-alpine`).
+1. ~~**Docker hardening**: Optimize the base image to reduce attack surface (e.g., use `eclipse-temurin:17-jre-alpine`).~~ ✅ Done
 2. **Dependency scanning**: Add GitHub Actions workflow with Snyk or Dependabot to audit Maven libraries.
 3. **AI input validation**: Sanitize prompts sent to the Groq API to prevent prompt injection attacks.
 4. **Input validation**: Add `@Valid` + `@NotBlank` constraints on DTOs using `spring-boot-starter-validation`.

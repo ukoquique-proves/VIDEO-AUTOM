@@ -1,6 +1,6 @@
 # PLAN.md
 
-## Project: The API Bridge
+## Project: AI Logistics Automation Hub
 
 ### Goal
 Connect a legacy system (CSV/SQL) to modern tools (Slack, Notion, Discord) by sending extracted results from Project_1 directly to a client's email or Slack channel.

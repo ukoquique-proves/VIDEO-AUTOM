@@ -1,26 +1,37 @@
 package com.example.apibridge.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
 @io.swagger.v3.oas.annotations.media.Schema(description = "Data model representing a stored extraction")
+@JsonPropertyOrder({"id", "companyName", "date", "totalAmount", "category", "status", "isUrgent"})
 public class ExtractionResponse {
     @io.swagger.v3.oas.annotations.media.Schema(description = "Unique ID of the extraction", example = "1")
+    @JsonProperty("id")
     private Long id;
 
     @io.swagger.v3.oas.annotations.media.Schema(description = "Name of the company involved", example = "Acme Corp")
+    @JsonProperty("companyName")
     private String companyName;
 
     @io.swagger.v3.oas.annotations.media.Schema(description = "Date of the transaction", example = "2023-01-01")
+    @JsonProperty("date")
     private String date;
 
     @io.swagger.v3.oas.annotations.media.Schema(description = "Total amount of the transaction", example = "123.45")
+    @JsonProperty("totalAmount")
     private Double totalAmount;
 
     @io.swagger.v3.oas.annotations.media.Schema(description = "Category of the document", example = "Invoice")
+    @JsonProperty("category")
     private String category;
 
     @io.swagger.v3.oas.annotations.media.Schema(description = "Status mentioned in text", example = "Delayed")
+    @JsonProperty("status")
     private String status;
 
     @io.swagger.v3.oas.annotations.media.Schema(description = "Whether the situation is urgent", example = "true")
+    @JsonProperty("isUrgent")
     private Boolean isUrgent;
 
     public Long getId() {

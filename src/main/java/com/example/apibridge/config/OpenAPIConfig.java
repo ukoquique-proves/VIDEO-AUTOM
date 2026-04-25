@@ -12,8 +12,8 @@ public class OpenAPIConfig {
     public OpenAPI apiBridgeOpenAPI() {
         return new OpenAPI()
                 .info(new Info()
-                        .title("The API Bridge")
-                        .description("Bridge legacy system results to modern tools (Slack, Email) with AI integration.")
+                        .title("AI Logistics Automation Hub")
+                        .description("AI-driven document extraction pipeline for logistics automation — sends structured JSON results to Slack and Email.")
                         .version("1.0"));
     }
 }

@@ -1,6 +1,6 @@
 # Logistics Automation Showcase — Demo Scenarios
 
-This document outlines the concrete business scenarios used to demonstrate the power of **The API Bridge**. These scenarios go beyond simple text-to-JSON extraction, showing how AI provides actionable insights for logistics teams.
+This document outlines the concrete business scenarios used to demonstrate the power of **AI Logistics Automation Hub**. These scenarios go beyond simple text-to-JSON extraction, showing how AI provides actionable insights for logistics teams.
 
 ---
 

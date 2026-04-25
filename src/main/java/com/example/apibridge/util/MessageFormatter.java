@@ -35,7 +35,7 @@ public class MessageFormatter {
         }
 
         sb.append("----------------------------\n");
-        sb.append("Processed by The API Bridge");
+        sb.append("Processed by AI Logistics Automation Hub");
         return sb.toString();
     }
 }

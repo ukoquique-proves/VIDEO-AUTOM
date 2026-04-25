@@ -157,6 +157,49 @@
         .badge-success { background: rgba(16, 185, 129, 0.2); color: var(--success); border: 1px solid var(--success); }
         .badge-normal { background: rgba(99, 102, 241, 0.2); color: var(--primary); border: 1px solid var(--primary); }
 
+        .btn {
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-family: inherit;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--text-dim);
+            color: var(--text-dim);
+        }
+
+        .btn-outline:hover {
+            background: rgba(255,255,255,0.05);
+            border-color: var(--text);
+            color: var(--text);
+            box-shadow: none;
+        }
+
         .empty-state {
             padding: 4rem;
             text-align: center;
@@ -183,6 +226,11 @@
                 Live Monitoring Active
             </div>
         </header>
+
+        <div style="display: flex; gap: 1rem; margin-bottom: 2rem;">
+            <button onclick="runDemo()" id="btnDemo" class="btn">🚀 Run Demo Scenarios</button>
+            <button onclick="resetDemo()" id="btnReset" class="btn btn-outline">🗑️ Reset Database</button>
+        </div>
 
         <div class="grid">
             <div class="stat-card">
@@ -282,6 +330,45 @@
             if (s.includes('DELIVERED') || s.includes('COMPLETED') || s.includes('SUCCESS')) return 'badge-success';
             if (s.includes('PENDING') || s.includes('WARNING')) return 'badge-pending';
             return 'badge-normal';
+        }
+
+        async function runDemo() {
+            const btn = document.getElementById('btnDemo');
+            const originalText = btn.innerHTML;
+            btn.disabled = true;
+            btn.innerHTML = '⌛ Processing...';
+            
+            try {
+                const response = await fetch('/api/demo/populate', { method: 'POST' });
+                const message = await response.text();
+                await fetchExtractions();
+                if (response.ok) {
+                    alert(message || 'Demo data populated successfully.');
+                } else {
+                    alert(message || 'Failed to populate demo data.');
+                }
+            } catch (error) {
+                console.error('Error running demo:', error);
+                alert('Error connecting to server.');
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = originalText;
+            }
+        }
+
+        async function resetDemo() {
+            if (!confirm('Are you sure you want to reset the database?')) return;
+            
+            try {
+                const response = await fetch('/api/demo/reset', { method: 'POST' });
+                if (response.ok) {
+                    fetchExtractions();
+                } else {
+                    alert('Failed to reset database.');
+                }
+            } catch (error) {
+                console.error('Error resetting demo:', error);
+            }
         }
 
         // Poll every 5 seconds

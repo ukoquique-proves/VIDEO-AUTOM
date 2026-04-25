@@ -1,0 +1,14 @@
+CRITICAL NOTIFICATION - IMMEDIATE ACTION REQUIRED
+
+To: Logistics Manager
+From: Port Authority
+Date: 2026-04-24
+Company: Swift Port Services
+
+Subject: URGENT - CUSTOMS HOLD ON SHIPMENT #SP-5502
+
+The shipment for Swift Port Services with a value of $5,600.00 is currently on CUSTOMS HOLD. 
+Documentation is missing. If not resolved within 12 hours, the shipment will be returned.
+
+Status: CRITICAL / PENDING
+Priority: HIGH / URGENT

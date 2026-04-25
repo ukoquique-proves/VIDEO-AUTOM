@@ -19,6 +19,11 @@ All notable changes to this project will be documented in this file.
 - **Semantic Status UI**: Implemented an intelligent status-to-color mapping system in the dashboard (Delivered → Green, Pending → Yellow, Delayed → Orange) for instant visual feedback.
 - **New Retrieval API**: Introduced `ExtractionController` to provide a dedicated endpoint for fetching stored extraction records.
 - **Notification Consistency**: Unified all notification headers to "Logistics Data Extraction" across AI and database-driven workflows for a professional, cohesive user experience.
+- **Demo Data Loader Endpoint**: Added `/api/demo/populate` to process all `.txt` files from `demo-assets/` through the AI extraction pipeline and persist results for live demos.
+- **Interactive Dashboard Controls**: Added "Run Demo Scenarios" and "Reset Database" actions to `static/index.html` for one-click showcase flows.
+- **Critical Demo Asset**: Added `demo-assets/urgent-critical.txt` to exercise urgency/status behavior with a high-priority incident scenario.
+- **JSON Contract Probe Endpoint**: Added `GET /api/extractions/sample` to verify frontend JSON shape compatibility without requiring live AI calls.
+- **Troubleshooting Guide**: Added `TROUBLESHOOTING.md` with concrete fixes for Maven path errors, Docker runtime setup, demo populate failures, and API key authorization issues.
 
 ### Changed
 - **Roadmap Evolution**: Updated `PLAN.md` to include Phase 4 (Showcase Scenarios) as a strategic requirement before demo production.
@@ -31,9 +36,17 @@ All notable changes to this project will be documented in this file.
 - **Professional Documentation Upgrade**: Re-structured `README.md` for better positioning and accurate showcases.
 - **Architectural Evolution Plan**: Added Phase 6 to `PLAN.md` documenting the transition toward a provider-agnostic Hexagonal Architecture.
 - **AI-Agnostic Vision**: Formally included OpenAI and Gemini as future supported providers in project goals.
+- **Production Container Hardening**: Updated Docker base image from `eclipse-temurin:17-jdk-alpine` to `eclipse-temurin:17-jre-alpine` to reduce runtime image size and attack surface.
+- **Docker Runtime Compatibility**: Updated `Dockerfile` to copy `demo-assets/` into the image and corrected the artifact copy path to `target/autom-hub-0.0.1-SNAPSHOT.jar`.
+- **Project Naming Consistency**: Replaced legacy "API Bridge" branding with "AI Logistics Automation Hub" across documentation, OpenAPI metadata, utility output text, and verification scripts.
+- **Contribution Guidelines Upgrade**: Rewrote `CONTRIBUTING.md` with professional standards for architecture, branching, commit style, testing flow, and contribution quality.
 
 ### Fixed
 - **Defensive Logic**: Corrected a potential `NullPointerException` in `AIService` by ensuring input validation occurs before any processing or logging.
+- **Demo Populate False Success**: Updated `/api/demo/populate` to return accurate outcomes (created/failed counts), return `500` when zero records are created, and include failure context instead of always returning success.
+- **Dashboard Feedback Accuracy**: Updated the demo run button flow to display the backend response message and refresh extraction data immediately after populate attempts.
+- **Demo Asset Data Quality**: Corrected `demo-assets/sample-invoice.txt` amount from `,450.50` to `$1,450.50` to remove extraction ambiguity in live demos.
+- **Serialization Stability**: Locked `ExtractionResponse` output field names with explicit Jackson annotations (`companyName`, `date`, `totalAmount`, `category`, `status`, `isUrgent`) to prevent silent frontend breakage from future naming-strategy changes.
 
 ## [1.0.0] - 2026-04-21
 

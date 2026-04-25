@@ -3,7 +3,7 @@
 # Base URL
 BASE_URL="http://localhost:8080/api"
 
-echo "=== API Bridge Usage Verification ==="
+echo "=== AI Logistics Automation Hub Usage Verification ==="
 
 # 1. Send Existing Extraction to Email
 # Requires an ID that exists in the DB. Since we use H2 mem, we might need to seed it first or this will 404.
