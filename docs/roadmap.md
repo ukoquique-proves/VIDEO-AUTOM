@@ -36,8 +36,27 @@ Connect logistics data streams to modern communication tools (Slack, Email) by e
 
 ### Phase 4: Strategic Polish ✅
 - [x] Professionalize documentation and architectural guides.
+- [x] Standardize internal logs and review notes.
 
-### Phase 5: Architectural Evolution (Future)
+### Phase 5: Demo Preparation (Video Readiness) ✅
+- [x] **Happy Path Polish**: Refined `/api/send/ai/extract` for edge-case handling.
+- [x] **Observability**: Implemented a glassmorphic dashboard (`/index.html`) for real-time logging feedback.
+- [x] **Demo Data**: Created a population utility (`/api/demo/populate`) for rapid scenario resets.
+
+### Phase 6: Promotional Video Production
+- [ ] **Asset Preparation**
+    - [ ] Scenario Setup: The "Logistics Bottleneck" (messy text assets).
+    - [ ] UI Setup: Dashboard vs. Swagger UI vs. Slack.
+- [ ] **Recording Scenes**
+    - [ ] **0:00-0:15**: The Problem (Unstructured logistics chaos).
+    - [ ] **0:15-0:40**: The Solution (AI-driven extraction).
+    - [ ] **0:40-0:50**: The "Wow" Factor (Instant Slack/Email alerts).
+    - [ ] **0:50-1:00**: The Closing (Developer profile and contact).
+- [ ] **Marketing**
+    - [ ] Design high-impact thumbnail.
+    - [ ] Global rollout (LinkedIn/Discord).
+
+### Phase 7: Architectural Evolution (Future)
 - [ ] **Hexagonal Architecture**: Define `AIProvider` ports to decouple core logic from specific API adapters.
 - [ ] **Multi-Provider Support**: Add OpenAI and Gemini adapters.
 - [ ] **Advanced Integrations**: Notion, Discord, and scheduled digests.

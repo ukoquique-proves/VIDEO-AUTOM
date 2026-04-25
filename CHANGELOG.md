@@ -2,7 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
-## [1.1.1] - 2026-04-25
+## [1.1.2] - 2026-04-25
+
+### Added
+- **Video Production Roadmap**: Restored the "Promotional Video Production" phase (Phase 6) to `roadmap.md`, including the 0:00-1:00 recording script and marketing strategy.
+- **Showcase Milestones**: Re-included "Demo Preparation" (Phase 5) in the roadmap to track dashboard observability and demo-data population utilities.
 
 ### Added
 - **AI Extraction Prompt Optimization**: Refined the system prompt in `AIService` to enforce flat JSON output, specifically resolving the 4/5 record creation failure during demo population of complex operation logs.
