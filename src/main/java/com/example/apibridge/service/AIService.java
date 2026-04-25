@@ -46,6 +46,7 @@ public class AIService {
         log.info("Starting AI extraction for text length: {}", request.getText().length());
 
         String prompt = "Extract data from the following logistics text. Respond ONLY with a valid JSON object containing the fields: 'companyName', 'date' (YYYY-MM-DD), 'totalAmount' (numeric), 'category' (e.g., Invoice, Status Update), 'status' (e.g., Delayed, Delivered, Pending), and 'isUrgent' (boolean).\n\n"
+                + "IMPORTANT: If the text contains multiple entries, consolidate the information into a SINGLE flat JSON object (do not use arrays). Summarize the overall status and total amounts where applicable.\n\n"
                 + "If a field is not found or not applicable, use null.\n\nText: "
                 + request.getText();
 

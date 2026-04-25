@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.1.1] - 2026-04-25
+
+### Added
+- **AI Extraction Prompt Optimization**: Refined the system prompt in `AIService` to enforce flat JSON output, specifically resolving the 4/5 record creation failure during demo population of complex operation logs.
+
+### Fixed
+- **SMTP Authentication Compliance**: Secured the email integration by migrating to a Google App Password, ensuring reliable SMTP authentication and better account protection.
+
 ## [1.1.0] - 2026-04-25
 
 ### Added
