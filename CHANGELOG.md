@@ -2,25 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
-## [Unreleased]
+## [1.1.0] - 2026-04-25
 
 ### Added
 - **Professional Documentation Suite**: Consolidated all project metadata into a clean `docs/` directory, including a new `roadmap.md`, `ai-integration.md`, `demo-guide.md`, `troubleshooting.md`, and `review-notes.md`.
 - **Internal Development Logs**: Moved session-specific logs and developer notes to `.github/INTERNAL_LOGS.md` to maintain a professional, visitor-facing `docs/` folder.
-
-### Changed
-- **Swagger UI Standardization**: Standardized all Swagger UI references to the consistent `/swagger-ui/index.html` path and updated `application.yml` to ensure technical alignment.
-- **README Transparency**: Refined the README to clearly distinguish between the active Groq integration and planned OpenAI/Gemini support, including updated architecture diagrams.
-- **Project Metadata Accuracy**: Corrected malformed tags in `pom.xml` and updated the project URL to the official repository.
-
-## [1.1.0] - 2026-04-25
-
-### Added
 - **Logistics Showcase Scenarios**: Implemented advanced extraction scenarios for Supplier Invoices, Shipment Delays, and Daily Ops Logs.
 - **Enhanced AI Model**: Expanded `AIResponse` DTO with `status`, `category`, and `isUrgent` fields to support specialized logistics logic.
 - **Advanced Prompting**: Upgraded `AIService` system prompts to perform intelligent categorization and urgency detection.
 - **Rich Assets**: Added `invoice-routing.txt`, `status-delay.txt`, and `logistics-summary.txt` to `demo-assets/` for rapid stakeholder demonstrations.
-- **Storytelling Documentation**: Created `DEMO.md` which translates technical features into business-value stories with runnable examples.
+- **Storytelling Documentation**: Created `demo-guide.md` (previously `DEMO.md`) which translates technical features into business-value stories with runnable examples.
 - **Urgency-Aware Notifications**: Updated `MessageFormatter` and notification services to visually flag urgent extraction results with clear warnings.
 - **Comprehensive Testing**: Added `testAdvancedShowcaseExtraction` to `AIServiceTest` and verified entire 31-test suite success.
 - **Architectural Cleanup**: Standardized constructor injection by removing redundant `@Autowired` annotations from all Controllers and Services, aligning with modern Spring Boot standards.
@@ -34,10 +25,12 @@ All notable changes to this project will be documented in this file.
 - **Interactive Dashboard Controls**: Added "Run Demo Scenarios" and "Reset Database" actions to `static/index.html` for one-click showcase flows.
 - **Critical Demo Asset**: Added `demo-assets/urgent-critical.txt` to exercise urgency/status behavior with a high-priority incident scenario.
 - **JSON Contract Probe Endpoint**: Added `GET /api/extractions/sample` to verify frontend JSON shape compatibility without requiring live AI calls.
-- **Troubleshooting Guide**: Added `TROUBLESHOOTING.md` with concrete fixes for Maven path errors, Docker runtime setup, demo populate failures, and API key authorization issues.
 
 ### Changed
-- **Roadmap Evolution**: Updated `PLAN.md` to include Phase 4 (Showcase Scenarios) as a strategic requirement before demo production.
+- **Swagger UI Standardization**: Standardized all Swagger UI references to the consistent `/swagger-ui/index.html` path and updated `application.yml` to ensure technical alignment.
+- **README Transparency**: Refined the README to clearly distinguish between the active Groq integration and planned OpenAI/Gemini support, including updated architecture diagrams.
+- **Project Metadata Accuracy**: Corrected malformed tags in `pom.xml` and updated the project URL to the official repository.
+- **Roadmap Evolution**: Updated roadmap documentation to include Phase 4 (Showcase Scenarios) as a completed strategic requirement.
 - **Unified Notification Formatting**: Refactored `MessageFormatter` so both the AI path and the DB retrieval path use a single `format()` method, ensuring `category`, `status`, and `isUrgent` are always included in email/Slack messages regardless of how data was sourced.
 - **Exception Handler Ordering**: Reordered handlers in `GlobalExceptionHandler` from most-specific to most-generic (`MethodArgumentNotValidException` → `ResourceNotFoundException` → `NotificationException` → `IllegalArgumentException` → `RuntimeException` → `Exception`) to eliminate the misleading dead-path appearance and align with Spring convention.
 - **Testable Architecture Refactoring**: Refactored `SlackSenderService` to use constructor-based dependency injection for the `Slack` client, decoupling it from static factory methods and enabling total isolation through Mockito.
@@ -45,7 +38,7 @@ All notable changes to this project will be documented in this file.
 - **Performance Optimization**: Refactored `SlackSenderService` to initialize the Slack client once in the constructor, preventing resource leaks and aligning its lifecycle with the Spring bean.
 - **Architectural Refactoring**: Decoupled `SendController` from persistence logic by moving repository and mapper dependencies into `ExtractionFetchService`, strictly adhering to layered architecture principles.
 - **Professional Documentation Upgrade**: Re-structured `README.md` for better positioning and accurate showcases.
-- **Architectural Evolution Plan**: Added Phase 6 to `PLAN.md` documenting the transition toward a provider-agnostic Hexagonal Architecture.
+- **Architectural Evolution Plan**: Updated roadmap documenting the transition toward a provider-agnostic Hexagonal Architecture.
 - **AI-Agnostic Vision**: Formally included OpenAI and Gemini as future supported providers in project goals.
 - **Production Container Hardening**: Updated Docker base image from `eclipse-temurin:17-jdk-alpine` to `eclipse-temurin:17-jre-alpine` to reduce runtime image size and attack surface.
 - **Docker Runtime Compatibility**: Updated `Dockerfile` to copy `demo-assets/` into the image and corrected the artifact copy path to `target/autom-hub-0.0.1-SNAPSHOT.jar`.
