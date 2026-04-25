@@ -2,6 +2,7 @@ package com.example.apibridge.service;
 
 import com.example.apibridge.dto.AIResponse;
 import com.example.apibridge.dto.ExtractionRequest;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -22,6 +23,8 @@ public class AIServiceTest {
     @Mock
     private RestTemplate restTemplate;
 
+    private ObjectMapper objectMapper = new ObjectMapper();
+
     private AIService aiService;
 
     private static final String API_URL = "http://mock-groq/v1/chat/completions";
@@ -30,7 +33,7 @@ public class AIServiceTest {
 
     @BeforeEach
     public void setUp() {
-        aiService = new AIService(API_KEY, MODEL, API_URL, restTemplate);
+        aiService = new AIService(API_KEY, MODEL, API_URL, restTemplate, objectMapper);
     }
 
     // --- Input validation ---
