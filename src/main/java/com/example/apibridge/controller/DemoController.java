@@ -3,7 +3,7 @@ package com.example.apibridge.controller;
 import com.example.apibridge.dto.AIResponse;
 import com.example.apibridge.dto.ExtractionRequest;
 import com.example.apibridge.service.AIService;
-import com.example.apibridge.service.ExtractionFetchService;
+import com.example.apibridge.service.ExtractionService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.slf4j.Logger;
@@ -28,17 +28,17 @@ public class DemoController {
 
     private static final Logger log = LoggerFactory.getLogger(DemoController.class);
     private final AIService aiService;
-    private final ExtractionFetchService extractionFetchService;
+    private final ExtractionService extractionService;
 
-    public DemoController(AIService aiService, ExtractionFetchService extractionFetchService) {
+    public DemoController(AIService aiService, ExtractionService extractionService) {
         this.aiService = aiService;
-        this.extractionFetchService = extractionFetchService;
+        this.extractionService = extractionService;
     }
 
     @PostMapping("/reset")
     @Operation(summary = "Reset Database", description = "Deletes all extractions and ensures a clean state for the demo.")
     public ResponseEntity<String> resetDatabase() {
-        extractionFetchService.clearAll();
+        extractionService.clearAll();
         return ResponseEntity.ok("Database reset successful. Ready for demo!");
     }
 
@@ -74,7 +74,7 @@ public class DemoController {
                 ExtractionRequest request = new ExtractionRequest();
                 request.setText(content);
                 AIResponse aiResponse = aiService.extractData(request);
-                extractionFetchService.saveAIExtraction(aiResponse);
+                extractionService.saveAIExtraction(aiResponse);
                 successful++;
             } catch (Exception e) {
                 log.error("Failed to process demo file {}: {}", path, e.getMessage());

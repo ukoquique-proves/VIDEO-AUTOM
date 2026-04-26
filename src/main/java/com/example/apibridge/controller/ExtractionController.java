@@ -1,7 +1,7 @@
 package com.example.apibridge.controller;
 
 import com.example.apibridge.dto.ExtractionResponse;
-import com.example.apibridge.service.ExtractionFetchService;
+import com.example.apibridge.service.ExtractionService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
@@ -16,16 +16,16 @@ import java.util.List;
 @Tag(name = "Extraction Retrieval", description = "Endpoints for viewing stored extraction data")
 public class ExtractionController {
 
-    private final ExtractionFetchService extractionFetchService;
+    private final ExtractionService extractionService;
 
-    public ExtractionController(ExtractionFetchService extractionFetchService) {
-        this.extractionFetchService = extractionFetchService;
+    public ExtractionController(ExtractionService extractionService) {
+        this.extractionService = extractionService;
     }
 
     @GetMapping
     @Operation(summary = "Get all extractions", description = "Returns a list of all data extracted from documents.")
     public List<ExtractionResponse> getAllExtractions() {
-        return extractionFetchService.fetchAllExtractions();
+        return extractionService.fetchAllExtractions();
     }
 
     @GetMapping("/sample")

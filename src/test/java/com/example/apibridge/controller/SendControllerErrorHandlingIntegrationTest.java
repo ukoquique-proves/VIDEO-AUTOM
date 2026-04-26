@@ -1,7 +1,7 @@
 package com.example.apibridge.controller;
 
 import com.example.apibridge.exception.ResourceNotFoundException;
-import com.example.apibridge.service.ExtractionFetchService;
+import com.example.apibridge.service.ExtractionService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -25,11 +25,11 @@ public class SendControllerErrorHandlingIntegrationTest {
     private MockMvc mockMvc;
 
     @MockBean
-    private ExtractionFetchService extractionFetchService;
+    private ExtractionService extractionService;
 
     @Test
     public void whenExtractionNotFound_shouldReturn404Json() throws Exception {
-        when(extractionFetchService.fetchExtractionById(999L))
+        when(extractionService.fetchExtractionById(999L))
                 .thenThrow(new ResourceNotFoundException("Extraction not found with ID: 999"));
 
         mockMvc.perform(post("/api/send/email/999")

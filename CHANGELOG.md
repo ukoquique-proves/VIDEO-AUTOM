@@ -2,7 +2,14 @@
 
 All notable changes to this project will be documented in this file.
  
-## [1.2.1] - 2026-04-26
+## [1.2.2] - 2026-04-26
+
+### Added
+- **Intelligent Audio Overlap Prevention**: Enhanced the `merge_video_audio.js` script with FFmpeg `atempo` filters to automatically compress narration blocks that exceed their visual scene duration.
+- **Automated Narration Pipeline**: Fully automated the generation of voiceovers and their synchronization with the video showcase.
+
+### Changed
+- **Production Documentation**: Updated `RECORDING.md` and `NARRATION_SCRIPT.md` to document the automated audio pacing logic.
 
 ### Added
 - **Automated Video Showcase**: Implemented and executed a Playwright-based recording script (`record.js`) to generate a professional .webm showcase, covering the dashboard, Swagger UI extraction, and real-time population scenarios.

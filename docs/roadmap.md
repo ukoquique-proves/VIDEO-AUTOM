@@ -44,9 +44,10 @@ Connect logistics data streams to modern communication tools (Slack, Email) by e
 - [x] **Demo Data**: Created a population utility (`/api/demo/populate`) for rapid scenario resets.
 
 ### Phase 6: Promotional Video Production ✅
-- [x] **Asset Preparation**: Validated all messy text assets for demo scenarios.
-- [x] **UI Setup**: Verified Dashboard, Swagger UI, and Slack notification flow.
-- [x] **Automated Recording**: Successfully generated a high-quality .webm showcase using Playwright.
+- [x] **Visual Assets**: Successfully generated automated showcase clips using Playwright.
+- [x] **Automated Audio**: Implemented TTS generation and FFmpeg mixing pipeline.
+- [x] **Final Sync**: Resolved voice overlaps using `atempo` time-stretching.
+- [x] **Production Ready**: Generated `final_showcase_with_audio.webm` with synchronized narration.
 - [ ] **Marketing**
     - [ ] Design high-impact thumbnail.
     - [ ] Global rollout (LinkedIn/Discord).

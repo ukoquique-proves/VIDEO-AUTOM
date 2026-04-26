@@ -14,6 +14,14 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Service responsible for orchestrating the AI extraction logic.
+ * <p>
+ * This service coordinates with external LLM providers (e.g., Groq) to convert 
+ * unstructured text into structured {@link AIResponse} objects. It does not 
+ * handle data persistence; that is the responsibility of {@link ExtractionService}.
+ * </p>
+ */
 @Service
 public class AIService {
 

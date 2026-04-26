@@ -5,7 +5,7 @@ import com.example.apibridge.dto.ExtractionRequest;
 import com.example.apibridge.dto.ExtractionResponse;
 import com.example.apibridge.service.AIService;
 import com.example.apibridge.service.EmailSenderService;
-import com.example.apibridge.service.ExtractionFetchService;
+import com.example.apibridge.service.ExtractionService;
 import com.example.apibridge.service.SlackSenderService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
@@ -15,16 +15,16 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/send")
 @io.swagger.v3.oas.annotations.tags.Tag(name = "Sending Operations", description = "Endpoints for triggering email and Slack notifications")
 public class SendController {
-    private final ExtractionFetchService extractionFetchService;
+    private final ExtractionService extractionService;
     private final EmailSenderService emailSenderService;
     private final SlackSenderService slackSenderService;
     private final AIService aiService;
 
-    public SendController(ExtractionFetchService extractionFetchService,
+    public SendController(ExtractionService extractionService,
             EmailSenderService emailSenderService,
             SlackSenderService slackSenderService,
             AIService aiService) {
-        this.extractionFetchService = extractionFetchService;
+        this.extractionService = extractionService;
         this.emailSenderService = emailSenderService;
         this.slackSenderService = slackSenderService;
         this.aiService = aiService;
@@ -35,7 +35,7 @@ public class SendController {
     @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "Email sent successfully")
     @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "404", description = "Extraction not found")
     public ResponseEntity<String> sendToEmail(@PathVariable Long id, @RequestParam String to) {
-        ExtractionResponse extraction = extractionFetchService.fetchExtractionById(id);
+        ExtractionResponse extraction = extractionService.fetchExtractionById(id);
         emailSenderService.sendExtractionByEmail(to, extraction);
         return ResponseEntity.ok("Sent to email");
     }
@@ -46,7 +46,7 @@ public class SendController {
     @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "404", description = "Extraction not found")
     @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "500", description = "Internal server error")
     public ResponseEntity<String> sendToSlack(@PathVariable Long id) {
-        ExtractionResponse extraction = extractionFetchService.fetchExtractionById(id);
+        ExtractionResponse extraction = extractionService.fetchExtractionById(id);
         slackSenderService.sendExtractionToSlack(extraction);
         return ResponseEntity.ok("Sent to Slack");
     }
@@ -62,7 +62,7 @@ public class SendController {
             return ResponseEntity.badRequest().body("Failed to extract data from text.");
 
         // Persist via service
-        extractionFetchService.saveAIExtraction(aiResponse);
+        extractionService.saveAIExtraction(aiResponse);
 
         emailSenderService.sendAIExtractionByEmail(to, aiResponse);
         return ResponseEntity.ok("Sent AI extraction to email");
@@ -79,7 +79,7 @@ public class SendController {
             return ResponseEntity.badRequest().body("Failed to extract data from text.");
 
         // Persist via service
-        extractionFetchService.saveAIExtraction(aiResponse);
+        extractionService.saveAIExtraction(aiResponse);
 
         slackSenderService.sendAIExtractionToSlack(aiResponse);
         return ResponseEntity.ok("Sent AI extraction to Slack");
@@ -95,7 +95,7 @@ public class SendController {
             return ResponseEntity.badRequest().build();
 
         // Persist via service
-        extractionFetchService.saveAIExtraction(aiResponse);
+        extractionService.saveAIExtraction(aiResponse);
 
         return ResponseEntity.ok(aiResponse);
     }

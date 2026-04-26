@@ -4,7 +4,7 @@ import com.example.apibridge.dto.AIResponse;
 import com.example.apibridge.dto.ExtractionRequest;
 import com.example.apibridge.service.AIService;
 import com.example.apibridge.service.EmailSenderService;
-import com.example.apibridge.service.ExtractionFetchService;
+import com.example.apibridge.service.ExtractionService;
 import com.example.apibridge.service.SlackSenderService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
@@ -38,7 +38,7 @@ public class SendControllerAIIntegrationTest {
     private SlackSenderService slackSenderService;
 
     @MockBean
-    private ExtractionFetchService extractionFetchService;
+    private ExtractionService extractionService;
 
     @Autowired
     private ObjectMapper objectMapper;
