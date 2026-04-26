@@ -43,15 +43,10 @@ Connect logistics data streams to modern communication tools (Slack, Email) by e
 - [x] **Observability**: Implemented a glassmorphic dashboard (`/index.html`) for real-time logging feedback.
 - [x] **Demo Data**: Created a population utility (`/api/demo/populate`) for rapid scenario resets.
 
-### Phase 6: Promotional Video Production
-- [ ] **Asset Preparation**
-    - [ ] Scenario Setup: The "Logistics Bottleneck" (messy text assets).
-    - [ ] UI Setup: Dashboard vs. Swagger UI vs. Slack.
-- [ ] **Recording Scenes**
-    - [ ] **0:00-0:15**: The Problem (Unstructured logistics chaos).
-    - [ ] **0:15-0:40**: The Solution (AI-driven extraction).
-    - [ ] **0:40-0:50**: The "Wow" Factor (Instant Slack/Email alerts).
-    - [ ] **0:50-1:00**: The Closing (Developer profile and contact).
+### Phase 6: Promotional Video Production ✅
+- [x] **Asset Preparation**: Validated all messy text assets for demo scenarios.
+- [x] **UI Setup**: Verified Dashboard, Swagger UI, and Slack notification flow.
+- [x] **Automated Recording**: Successfully generated a high-quality .webm showcase using Playwright.
 - [ ] **Marketing**
     - [ ] Design high-impact thumbnail.
     - [ ] Global rollout (LinkedIn/Discord).

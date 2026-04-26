@@ -1,6 +1,19 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
+ 
+## [1.2.1] - 2026-04-26
+
+### Added
+- **Automated Video Showcase**: Implemented and executed a Playwright-based recording script (`record.js`) to generate a professional .webm showcase, covering the dashboard, Swagger UI extraction, and real-time population scenarios.
+- **Roadmap Update**: Marked the Video Production phase as completed in `roadmap.md`.
+
+### Changed
+- **Architectural Refactoring**: Renamed `ExtractionFetchService` to `ExtractionService` across the entire codebase (including controllers and tests) to better reflect its comprehensive role in handling both data persistence and retrieval.
+- **Service-Layer Documentation**: Added detailed Javadoc to `ExtractionService` and `AIService` to formally define their architectural boundaries (Persistence vs. Orchestration logic).
+
+### Fixed
+- **Naming Ambiguity**: Resolved the misleading "fetch-only" connotation of the service layer by adopting a more neutral and accurate naming convention.
 
 ## [1.1.2] - 2026-04-25
 
