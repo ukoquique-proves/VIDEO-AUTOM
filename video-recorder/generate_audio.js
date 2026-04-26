@@ -2,12 +2,13 @@ const gtts = require('gtts');
 const fs = require('fs');
 const path = require('path');
 
+// Shortened text blocks to fit naturally into the visual scenes without speeding up
 const blocks = [
-    ["00", "Logistics operations are often buried in unstructured data—messy emails and invoices that cause critical delays. Today, we’re automating that chaos."],
-    ["10", "This is the AI Logistics Hub. With one click, our pipeline uses Groq AI to extract structured entities from raw text. Watch as 5 complex scenarios are processed live."],
-    ["20", "The system intelligently identifies company names, dates, and amounts, while also flagging status and urgency. Notice the color-coded badges providing instant operational visibility."],
-    ["30", "Let's submit a custom critical event. A port blockage in Rotterdam. By submitting this raw text via our API, the AI instantly structures the data, identifying the $125,000 value at risk."],
-    ["45", "The record appears instantly. Slack and email alerts have already been dispatched. This is professional-grade automation, built with Spring Boot 3 and a clean, layered architecture."],
+    ["00", "Logistics data is often trapped in messy emails and invoices. Today, we automate that chaos."],
+    ["10", "This is the AI Logistics Hub. Watch as our Groq-powered pipeline extracts data from 5 scenarios live."],
+    ["20", "The system identifies companies, dates, and amounts, using color-coded badges for instant operational visibility."],
+    ["30", "Let's submit a critical event. A port blockage in Rotterdam. The AI instantly identifies the 125,000 dollar value at risk."],
+    ["45", "The record appears instantly, and Slack alerts are dispatched. Professional automation built with Spring Boot 3."],
     ["55", "Built for performance. Built for scale. This is the AI Logistics Automation Hub."]
 ];
 
@@ -16,7 +17,7 @@ if (!fs.existsSync(outputDir)) {
     fs.mkdirSync(outputDir, { recursive: true });
 }
 
-console.log(`Generating ${blocks.length} audio blocks...`);
+console.log(`Generating ${blocks.length} shortened audio blocks for natural pacing...`);
 
 async function generateAll() {
     for (const [i, text] of blocks) {
@@ -36,7 +37,7 @@ async function generateAll() {
             });
         });
     }
-    console.log("Done! Audio blocks generated in", outputDir);
+    console.log("Done! Shortened audio blocks generated.");
 }
 
 generateAll().catch(console.error);
