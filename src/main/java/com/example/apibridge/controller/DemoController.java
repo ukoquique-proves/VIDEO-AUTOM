@@ -8,7 +8,9 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.Profile;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,6 +23,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.stream.Stream;
 
+@Profile("demo")
 @RestController
 @RequestMapping("/api/demo")
 @Tag(name = "Demo Operations", description = "Utilities for video demonstrations")
@@ -33,6 +36,12 @@ public class DemoController {
     public DemoController(AIService aiService, ExtractionService extractionService) {
         this.aiService = aiService;
         this.extractionService = extractionService;
+    }
+
+    @GetMapping("/health")
+    @Operation(summary = "Demo profile health check", description = "Returns 200 when the demo profile is active. Used by record.js to confirm the server is ready for recording.")
+    public ResponseEntity<String> health() {
+        return ResponseEntity.ok("demo profile active");
     }
 
     @PostMapping("/reset")

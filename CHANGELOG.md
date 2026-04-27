@@ -2,6 +2,31 @@
 
 All notable changes to this project will be documented in this file.
  
+## [1.2.3] - 2026-04-27
+
+### Added
+- **Video Pipeline Pre-flight Checks**: `record.js` now validates both server availability and `demo` Spring profile activation before launching Playwright, aborting with an actionable error message if either check fails.
+- **Audio Duration Validation**: `merge_video_audio.js` uses `ffprobe` to measure each audio block's real duration and aborts the FFmpeg merge with a clear error if any block would overlap the next scene's start timestamp.
+- **Convenience npm Scripts**: Added `generate-audio`, `record`, `merge`, and `build-video` scripts to `video-recorder/package.json` for single-command pipeline execution.
+
+### Changed
+- **Demo Profile Gating**: `DemoController` is now annotated with `@Profile("demo")`, ensuring `/api/demo/reset` and `/api/demo/populate` endpoints are completely absent from production deployments. Start with `mvn spring-boot:run -Dspring-boot.run.profiles=demo` to enable them.
+- **Video-Recorder Dependency Isolation**: Moved `gtts` dependency from the root `package.json` into `video-recorder/package.json`. The root `package.json` and `package-lock.json` have been removed so video tooling no longer leaks into the Java project root.
+- **H2 Persistence**: Switched datasource URL from `jdbc:h2:mem:testdb` (in-memory) to `jdbc:h2:file:./h2_data/testdb` (file-based) to ensure extraction records survive server restarts and multi-session demo recordings.
+- **Duplicate Audio Script Removed**: Deleted `video-recorder/generate_audio.py` (Python/gTTS) to establish `generate_audio.js` as the single source of truth for narration text and TTS generation.
+- **Orphan Artefact Removed**: Deleted `video-recorder/videos/list.txt`, a leftover from a previous `ffmpeg -f concat` approach that was no longer referenced anywhere.
+- **Recording Timing Aligned to Audio**: Extended `waitForTimeout` durations in `record.js` to produce a ~60-second video, matching the timestamp offsets expected by `merge_video_audio.js` audio blocks.
+- **Video File Naming Fixed**: `record.js` now captures `page.video().path()` after context close and renames the Playwright-generated random-UUID `.webm` to the canonical `final_showcase.webm` expected by `merge_video_audio.js`.
+- **RECORDING.md Accuracy**: Corrected documentation that incorrectly claimed `atempo` was used; updated to reflect the current approach of naturally-paced, pre-shortened audio blocks.
+
+### Fixed
+- **`AIResponse` Unknown Field Crash**: Added `@JsonIgnoreProperties(ignoreUnknown = true)` to `AIResponse`, preventing `UnrecognizedFieldException` when the LLM includes extra fields (e.g., `additionalInfo`) beyond the defined DTO schema. Demo now reliably creates 5/5 records.
+- **Nested Output Directory Bug**: Removed `generate_audio.py` which used a relative path `video-recorder/videos/audio_blocks` and would silently create a nested `video-recorder/video-recorder/videos/` directory if run from inside the `video-recorder/` folder.
+- **Final Audio Block Overlap**: Shortened the `block_55` narration text so its TTS output fits within the 5-second slot available before end-of-video.
+
+### Security / Hygiene
+- **`.gitignore` Hardened**: Added `node_modules/`, `h2_data/`, and `video-recorder/videos/` to prevent build artefacts, database files, and generated media from being accidentally committed.
+
 ## [1.2.2] - 2026-04-26
 
 ### Added

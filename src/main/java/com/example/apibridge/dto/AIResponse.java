@@ -1,6 +1,7 @@
 package com.example.apibridge.dto;
 
 @io.swagger.v3.oas.annotations.media.Schema(description = "Structured data extracted by AI")
+@com.fasterxml.jackson.annotation.JsonIgnoreProperties(ignoreUnknown = true)
 public class AIResponse {
     @io.swagger.v3.oas.annotations.media.Schema(description = "Extracted company or entity name", example = "Acme Corp")
     private String companyName;

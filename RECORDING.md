@@ -20,7 +20,7 @@ This document outlines the automated recording sequence for the promotional vide
 2. **Action**: Find `POST /api/send/ai/extract` in the "Sending Operations" section.
 3. **Input**: Click "Try it out" and paste the following text:
    ```text
-   URGENT: Shipment from Global Logistics Inc is stuck at Rotterdam Port due to a custom strike. Total value of delayed goods is $89,400. Status: CRITICAL DELAY.
+   URGENT: CRITICAL Port Blockage at Rotterdam. Shipment #AX-99 blocked by strike. Rescue cost estimate: $125,000. Status: DELAYED.
    ```
 4. **Execute**: Click the big blue button.
 5. **Outcome**: Show the structured JSON response appearing instantly in the Swagger console.
@@ -30,8 +30,11 @@ This document outlines the automated recording sequence for the promotional vide
 2. **Action**: Show record #6 appearing in the list.
 3. **Commentary**: Mentions that Slack notifications have been dispatched automatically (as per `AIService` logic).
 
-### Scene 5: Technical Excellence (0:55 - 1:00)
-1. **Naviate**: Briefly scroll through the `AIService.java` or `ExtractionService.java` in the IDE to show clean, professional Java code.
+### Scene 5: Closing Shot (0:55 - 1:00)
+1. **Action**: Scroll the populated dashboard from bottom to top, framing all extraction records as a final wide shot.
+2. **Outcome**: Clean ending on the glassmorphic dashboard with all records visible and the "Live Monitoring Active" pulse.
+
+> **Note**: Showing `AIService.java` in an IDE is not implementable via Playwright (a browser-only tool). The code architecture is covered in the README and `docs/ai-integration.md` for reviewers who want the technical deep-dive.
 
 ## 🛠️ Recording Configuration
 - **Recording Name**: `ai_logistics_hub_showcase`
@@ -47,6 +50,25 @@ Since the browser subagent recordings were taking too long and experiencing time
 
 This script natively connects to `localhost:8080`, executes the requested interactions exactly as outlined above, and leverages Playwright's built-in `recordVideo` functionality to reliably export a `.webm` file into the `video-recorder/videos` directory.
 
+### ⚠️ Prerequisites Before Running Any Script
+
+> These must be satisfied **before** running `npm run build-video` or `npm run record`.
+
+**1. Start the backend with the `demo` Spring profile:**
+```bash
+# From the project root
+mvn spring-boot:run -Dspring-boot.run.profiles=demo
+```
+The `demo` profile is required to expose `/api/demo/reset` and `/api/demo/populate`.  
+`generate_audio.js` does **not** need the backend — only `record.js` does.  
+Running `npm run build-video` without the backend will generate audio successfully, then abort at the recording step.
+
+**2. Install FFmpeg** (required by `merge_video_audio.js`):
+```bash
+sudo apt install ffmpeg   # Ubuntu/Debian
+brew install ffmpeg       # macOS
+```
+
 ### ⚠️ The "Sound & Narrative" Problem
 The automated Playwright approach has two major limitations for a promotional showcase:
 1. **No Audio**: The generated clips are completely silent.
@@ -54,8 +76,7 @@ The automated Playwright approach has two major limitations for a promotional sh
 
 ### 🎙️ Automatización de Audio (Generación y Mezcla)
 Para evitar procesos manuales, hemos implementado una pipeline de audio:
-1. **Generación (TTS)**: `video-recorder/generate_audio.js` crea los archivos `.mp3` desde el guion.
+1. **Generación (TTS)**: `video-recorder/generate_audio.js` crea los archivos `.mp3` utilizando textos acortados para lograr una narrativa fluida.
 2. **Mezcla Inteligente**: `video-recorder/merge_video_audio.js` utiliza **FFmpeg** para:
-    - **Sincronizar**: Inyecta los audios en los tiempos exactos del video.
-    - **Evitar Solapamientos**: Utiliza el filtro `atempo` para acelerar automáticamente los fragmentos de voz que duran más que su ranura de tiempo asignada.
-    - **Resultado**: Un video final `final_showcase_with_audio.webm` con narrativa fluida y sin voces superpuestas.
+    - **Sincronizar**: Inyecta los audios en los tiempos exactos del video usando audios ajustados, garantizando velocidad de voz natural sin solapamientos.
+    - **Resultado**: Un video final `final_showcase_with_audio.webm` con narrativa fluida y natural.

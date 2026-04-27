@@ -9,7 +9,7 @@ const blocks = [
     ["20", "The system identifies companies, dates, and amounts, using color-coded badges for instant operational visibility."],
     ["30", "Let's submit a critical event. A port blockage in Rotterdam. The AI instantly identifies the 125,000 dollar value at risk."],
     ["45", "The record appears instantly, and Slack alerts are dispatched. Professional automation built with Spring Boot 3."],
-    ["55", "Built for performance. Built for scale. This is the AI Logistics Automation Hub."]
+    ["55", "Built for scale. AI Logistics Hub."]
 ];
 
 const outputDir = path.join(__dirname, 'videos', 'audio_blocks');
