@@ -16,6 +16,8 @@ A professional-grade backend service that converts unstructured documents (invoi
 
 **📹 Watch the full narrated demo (~60s):** [`final_showcase_with_audio.webm`](video-recorder/videos/final_showcase_with_audio.webm)
 
+> 💼 **Hiring?** This project demonstrates production-grade AI integration, clean architecture, and full-stack delivery — [let's talk](https://www.linkedin.com/in/h%C3%A9ctor-corbellini-726553221/).
+
 ---
 
 ### ⚡ Quick Showcase: From Text to JSON
@@ -146,11 +148,9 @@ The application will be available at `http://localhost:8080`.
 
 ## 👤 About the Author
 
-**Héctor Corbellini** — Software Engineer focused on AI integration, clean architecture, and backend automation.
+**Héctor Corbellini** — Software Engineer specializing in AI-powered backend systems, clean architecture, and logistics automation.
 
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?logo=linkedin&style=for-the-badge)](https://www.linkedin.com/in/h%C3%A9ctor-corbellini-726553221/)
-
-*If you're looking for a developer who builds production-grade AI integrations with professional standards, [let's connect](https://www.linkedin.com/in/h%C3%A9ctor-corbellini-726553221/).*
+[![LinkedIn](https://img.shields.io/badge/Let's%20Connect-LinkedIn-blue?logo=linkedin&style=for-the-badge)](https://www.linkedin.com/in/h%C3%A9ctor-corbellini-726553221/)
 
 ---
 
