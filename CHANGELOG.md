@@ -4,6 +4,9 @@ All notable changes to this project will be documented in this file.
  
 ## [1.2.4] - 2026-04-28
 
+> [!WARNING]
+> **Video Production Critical Alert**: The current automated video creation process contains significant timing and synchronization issues that require urgent correction. Users should verify the output artifacts manually as the current pipeline may produce inconsistent results.
+
 ### Added
 - **General-Purpose Video Engine**: Refactored the video production pipeline into a reusable engine located in `video-recorder/engine/`.
 - **Scenario-Driven Architecture**: The engine is now completely decoupled from project-specific logic. All URLs, selectors, and narration live in project-specific scenario files under `video-recorder/scenarios/`.
