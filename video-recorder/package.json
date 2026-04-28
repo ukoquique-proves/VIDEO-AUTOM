@@ -4,10 +4,10 @@
   "description": "Standalone video production pipeline for AI Logistics Hub demo recordings.",
   "main": "index.js",
   "scripts": {
-    "generate-audio": "node generate_audio.js",
-    "record": "node record.js",
-    "merge": "node merge_video_audio.js",
-    "build-video": "node generate_audio.js && node record.js && node merge_video_audio.js"
+    "generate-audio": "node engine/generate_audio.js --scenario=$npm_config_scenario",
+    "record": "node engine/record.js --scenario=$npm_config_scenario",
+    "merge": "node engine/merge_video_audio.js --scenario=$npm_config_scenario",
+    "build-video": "npm run generate-audio --scenario=$npm_config_scenario && npm run record --scenario=$npm_config_scenario && npm run merge --scenario=$npm_config_scenario"
   },
   "keywords": [],
   "author": "",
