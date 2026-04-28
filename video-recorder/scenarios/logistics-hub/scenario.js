@@ -37,7 +37,8 @@ module.exports = {
             actions: async (page) => {
                 console.log('Clicking Run Demo Scenarios...');
                 await page.evaluate(() => document.getElementById('btnDemo').click());
-                await page.waitForTimeout(8000); // Wait for processing
+                console.log('Waiting for 5 records to populate...');
+                await page.waitForSelector('table tbody tr:nth-child(5)', { timeout: 30000 });
             },
             duration: 10
         },
