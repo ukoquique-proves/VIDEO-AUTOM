@@ -57,9 +57,19 @@ const { getScenario } = require('./utils');
         if (video) {
             const videoPath = await video.path();
             const targetPath = path.join(videoDir, outputFileName);
+            
+            // Post-recording file-size check
+            const stats = fs.statSync(videoPath);
+            const fileSizeKB = stats.size / 1024;
+            
+            if (fileSizeKB < 500) {
+                console.error(`❌ ERROR: Recorded video is too small (${fileSizeKB.toFixed(2)} KB). Capture likely failed.`);
+                process.exit(1);
+            }
+
             if (fs.existsSync(targetPath)) fs.unlinkSync(targetPath);
             fs.renameSync(videoPath, targetPath);
-            console.log(`✅ Raw video saved: ${targetPath}`);
+            console.log(`✅ Raw video saved: ${targetPath} (${fileSizeKB.toFixed(2)} KB)`);
         }
     }
 })();
