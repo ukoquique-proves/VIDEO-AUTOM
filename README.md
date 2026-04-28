@@ -14,7 +14,8 @@ A professional-grade backend service that converts unstructured documents (invoi
 
 ![AI Logistics Hub Dashboard](demo-assets/dashboard-screenshot.png)
 
-**📹 Watch the full narrated demo (~60s):** [`final_showcase_with_audio.webm`](video-recorder/videos/final_showcase_with_audio.webm)
+**📹 Watch the full narrated demo (~60s):** [`final_showcase_with_audio.webm`](video-recorder/scenarios/logistics-hub/videos/final_showcase_with_audio.webm)
+**📹 Watch the extended narrated demo (~120s):** [`final_showcase_2min_with_audio.webm`](video-recorder/scenarios/logistics-hub/videos/final_showcase_2min_with_audio.webm)
 
 > 💼 **Hiring?** This project demonstrates production-grade AI integration, clean architecture, and full-stack delivery — [let's talk](https://www.linkedin.com/in/h%C3%A9ctor-corbellini-726553221/).
 

@@ -30,11 +30,22 @@ const { getScenario } = require('./utils');
         await dialog.accept();
     });
 
+    const metadataPath = path.join(videoDir, 'metadata.json');
+    const sceneMetadata = [];
+
     try {
+        let currentVideoTime = 0;
         for (const scene of scenario.scenes) {
             console.log(`--- Scene: ${scene.id} (${scene.duration}s) ---`);
             const sceneStart = Date.now();
             
+            // Record actual start time relative to video start
+            sceneMetadata.push({
+                id: scene.id,
+                startTime: currentVideoTime,
+                duration: scene.duration
+            });
+
             if (scene.actions) {
                 await scene.actions(page);
             }
@@ -43,13 +54,25 @@ const { getScenario } = require('./utils');
             const remaining = scene.duration - elapsed;
             
             if (remaining > 0) {
+                // We still use a timeout here to fulfill the scene duration requirement
                 await page.waitForTimeout(remaining * 1000);
+                currentVideoTime += scene.duration;
+            } else {
+                console.warn(`⚠️ Warning: Scene ${scene.id} took ${elapsed.toFixed(2)}s, exceeding duration of ${scene.duration}s`);
+                currentVideoTime += elapsed;
             }
         }
+        
     } catch (error) {
         console.error('❌ Script failed:', error);
         await page.screenshot({ path: path.join(videoDir, 'error-screenshot.png') });
     } finally {
+        // Save metadata even on failure to allow partial sync
+        if (sceneMetadata.length > 0) {
+            fs.writeFileSync(metadataPath, JSON.stringify(sceneMetadata, null, 2));
+            console.log(`📊 Metadata saved: ${metadataPath}`);
+        }
+
         const video = page.video();
         await context.close(); 
         await browser.close();

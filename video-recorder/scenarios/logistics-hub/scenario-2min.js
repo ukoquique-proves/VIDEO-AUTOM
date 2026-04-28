@@ -37,9 +37,10 @@ module.exports = {
             actions: async (page) => {
                 console.log('Clicking Run Demo Scenarios...');
                 await page.evaluate(() => document.getElementById('btnDemo').click());
-                console.log('Waiting for 5 records to populate...');
-                await page.waitForSelector('table tbody tr:nth-child(5)', { timeout: 30000 });
-                await page.waitForTimeout(3000); // Extra pause to show the populated table
+                console.log('Waiting for records to populate...');
+                // Wait for at least one record, then wait a bit more for the rest
+                await page.waitForSelector('table tbody tr:nth-child(1)', { timeout: 30000 });
+                await page.waitForTimeout(10000); // Wait for the rest to finish processing
             },
             duration: 20
         },
@@ -56,11 +57,11 @@ module.exports = {
                     console.log("Could not hover over urgent badge, continuing...");
                 }
             },
-            duration: 15
+            duration: 20
         },
         {
             id: 'swagger_input',
-            startTime: 50,
+            startTime: 55,
             audioText: "Let's submit a critical event in real-time. A port blockage in Rotterdam affecting shipment AX-99. The AI instantly extracts the 125,000 dollar value at risk, the status, and all relevant details.",
             actions: async (page) => {
                 console.log('Navigating to Swagger UI...');
@@ -69,10 +70,14 @@ module.exports = {
 
                 const path = "/api/send/ai/extract";
                 const opblockHeader = page.locator(`.opblock-summary-path:has-text("${path}")`).first();
+                await opblockHeader.waitFor({ state: 'visible', timeout: 30000 });
                 await opblockHeader.click();
+                await page.waitForTimeout(2000);
                 
                 const tryOutBtn = page.locator('.try-out button');
+                await tryOutBtn.waitFor({ state: 'visible', timeout: 30000 });
                 await tryOutBtn.click();
+                await page.waitForTimeout(1000);
 
                 const customText = "URGENT: CRITICAL Port Blockage at Rotterdam. Shipment #AX-99 blocked by strike. Rescue cost estimate: $125,000. Status: DELAYED.";
                 await page.fill('textarea.body-param__text', JSON.stringify({ text: customText }, null, 2));
@@ -85,7 +90,7 @@ module.exports = {
         },
         {
             id: 'swagger_explore',
-            startTime: 70,
+            startTime: 75,
             audioText: "The Swagger UI provides complete API documentation for all endpoints. Developers can test the extraction service, retrieve stored records, and trigger email or Slack notifications directly from the browser.",
             actions: async (page) => {
                 console.log('Exploring Swagger UI...');
@@ -94,11 +99,11 @@ module.exports = {
                 await page.evaluate(() => window.scrollBy(0, 300));
                 await page.waitForTimeout(3000);
             },
-            duration: 10
+            duration: 20
         },
         {
             id: 'h2_console',
-            startTime: 80,
+            startTime: 95,
             audioText: "Behind the scenes, H2 database provides persistent storage. All extraction records survive server restarts, ensuring data integrity for production deployments.",
             actions: async (page) => {
                 console.log('Navigating to H2 console...');
@@ -107,11 +112,11 @@ module.exports = {
                 // Return to dashboard
                 await page.goto('http://localhost:8080/', { waitUntil: 'load' });
             },
-            duration: 10
+            duration: 15
         },
         {
             id: 'integration_proof',
-            startTime: 90,
+            startTime: 110,
             audioText: "The new record appears instantly in the dashboard. Slack alerts and email notifications are dispatched automatically, keeping stakeholders informed in real-time. Professional automation built with Spring Boot 3.",
             actions: async (page) => {
                 console.log('Navigating back to dashboard...');
@@ -122,7 +127,7 @@ module.exports = {
         },
         {
             id: 'closing',
-            startTime: 105,
+            startTime: 125,
             audioText: "Built for scale, designed for reliability. The AI Logistics Hub transforms unstructured logistics data into actionable insights. Automate your workflow today.",
             actions: async (page) => {
                 console.log('Final scroll...');

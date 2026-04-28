@@ -67,10 +67,14 @@ module.exports = {
 
                 const path = "/api/send/ai/extract";
                 const opblockHeader = page.locator(`.opblock-summary-path:has-text("${path}")`).first();
+                await opblockHeader.waitFor({ state: 'visible', timeout: 30000 });
                 await opblockHeader.click();
+                await page.waitForTimeout(2000);
                 
                 const tryOutBtn = page.locator('.try-out button');
+                await tryOutBtn.waitFor({ state: 'visible', timeout: 30000 });
                 await tryOutBtn.click();
+                await page.waitForTimeout(1000);
 
                 const customText = "URGENT: CRITICAL Port Blockage at Rotterdam. Shipment #AX-99 blocked by strike. Rescue cost estimate: $125,000. Status: DELAYED.";
                 await page.fill('textarea.body-param__text', JSON.stringify({ text: customText }, null, 2));

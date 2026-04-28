@@ -1,16 +1,39 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
- 
+
+## [1.2.5] - 2026-04-28
+
+### Added
+- **Dynamic Timing Synchronization**: Implemented a `metadata.json` bridge between `record.js` and `merge_video_audio.js`. The engine now tracks *actual* scene start times during recording, ensuring frame-perfect audio alignment even if browser actions experience latency.
+- **Audio Length Safety Validation**: Integrated `ffprobe` checks into `generate_audio.js` to proactively warn if narration text exceeds the allocated scene duration, preventing audio overlaps before they happen.
+- **Extended 2-Minute Showcase**: Added `scenario-2min.js` for an in-depth 120-second demonstration of the AI Logistics Hub, including H2 console and Swagger UI exploration.
+
+### Changed
+- **Automated Workspace Hygiene**: The `merge_video_audio.js` script now automatically deletes temporary audio blocks and metadata files upon successful video generation.
+- **Improved Recording Resilience**: Updated `record.js` to save timing metadata even in the event of a partial script failure, allowing for synchronized partial video exports.
+- **Enhanced Scenarios**: Refined `scenario-2min.js` with increased scene durations and more robust `waitForSelector` patterns to ensure 5/5 record population reliability.
+- **Git Hygiene**: Updated `.gitignore` to support the new scenario-specific video directory structure and ignore all `metadata.json` artifacts.
+
+### Fixed
+- **Audio/Video Desync**: Resolved the critical drift issue where narration would desync from visuals in videos longer than 60 seconds.
+- **Debug Artifact Leak**: Removed the Scene ID overlay from production recordings to ensure a clean, professional output.
+- **Playwright Environment**: Re-installed and verified Chromium browsers for the current execution environment.
+
+### Removed
+- **Legacy Video Artifacts**: Deleted redundant error screenshots and Playwright-generated random-UUID `.webm` files from the repository.
+
 ## [1.2.4] - 2026-04-28
 
-> [!WARNING]
-> **Video Production Critical Alert**: The current automated video creation process contains significant timing and synchronization issues that require urgent correction. Users should verify the output artifacts manually as the current pipeline may produce inconsistent results.
+> [!IMPORTANT]
+> **Video Production Status**: The timing and synchronization issues noted in the previous release have been fully resolved in v1.2.5.
 
 ### Added
 - **General-Purpose Video Engine**: Refactored the video production pipeline into a reusable engine located in `video-recorder/engine/`.
 - **Scenario-Driven Architecture**: The engine is now completely decoupled from project-specific logic. All URLs, selectors, and narration live in project-specific scenario files under `video-recorder/scenarios/`.
 - **Scenario Template**: Added `video-recorder/scenarios/_template/scenario.js` as a starter for new video projects.
+- **Scenario Synchronization**: These improvements were applied to both standard and 2-minute scenarios.
+- **Defensive UI Interactions**: Integrated `waitFor({ state: 'visible' })` and stabilization pauses for Swagger UI interactions, inspired by robust procedures in the reference project.
 - **Logistics Hub Scenario**: Migrated the existing AI Logistics Hub demo into its own scenario folder (`video-recorder/scenarios/logistics-hub/`).
 
 ### Changed

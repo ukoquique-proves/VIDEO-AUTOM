@@ -10,6 +10,7 @@ const videoDir = path.join(scenario.__baseDir, 'videos');
 const videoFile = path.join(videoDir, scenario.config.video.outputFileName);
 const audioDir = path.join(videoDir, scenario.config.audio.outputDir);
 const outputFile = path.join(videoDir, scenario.config.video.finalOutputFileName);
+const metadataFile = path.join(videoDir, 'metadata.json');
 
 async function buildVideo() {
     if (!fs.existsSync(videoFile)) {
@@ -17,9 +18,20 @@ async function buildVideo() {
         process.exit(1);
     }
 
+    let sceneTimings = scenario.scenes;
+    if (fs.existsSync(metadataFile)) {
+        console.log(`📊 Loading actual timings from: ${metadataFile}`);
+        sceneTimings = JSON.parse(fs.readFileSync(metadataFile, 'utf8'));
+    } else {
+        console.warn(`⚠️ Metadata file not found, using scenario's static startTimes.`);
+    }
+
     const audioInputs = [];
-    for (const scene of scenario.scenes) {
-        if (!scene.audioText) continue;
+    for (const scene of sceneTimings) {
+        // Find the matching scene in scenario to get audioText
+        const scenarioScene = scenario.scenes.find(s => s.id === scene.id);
+        if (!scenarioScene || !scenarioScene.audioText) continue;
+
         const filePath = path.join(audioDir, `block_${scene.id}.mp3`);
         if (fs.existsSync(filePath)) {
             audioInputs.push({ file: filePath, start: scene.startTime });
@@ -43,6 +55,19 @@ async function buildVideo() {
     try {
         await execPromise(command);
         console.log(`✅ Success! Final video: ${outputFile}`);
+
+        // Phase 1 (Technical Debt): Clean-up Logic
+        console.log("🧹 Cleaning up temporary audio blocks...");
+        for (const input of audioInputs) {
+            if (fs.existsSync(input.file)) {
+                fs.unlinkSync(input.file);
+            }
+        }
+        if (fs.existsSync(metadataFile)) {
+            fs.unlinkSync(metadataFile);
+        }
+        console.log("✅ Cleanup complete.");
+
     } catch (error) {
          console.error(`❌ FFmpeg failed: ${error.message}`);
     }
