@@ -1,76 +1,74 @@
-# video-recorder
+# General-Purpose Video Automation Pipeline
 
-Standalone Node.js pipeline for generating the AI Logistics Hub promotional video with narration.
-
----
-
-## ⚠️ Prerequisites — Read Before Running
-
-The pipeline has **two hard requirements** that must be satisfied before running any script:
-
-### 1. Backend must be running with the `demo` Spring profile
-
-`record.js` connects to `http://localhost:8080` to record the dashboard and Swagger UI.  
-The **`demo` Spring profile** must be active so that `/api/demo/reset` and `/api/demo/populate` are available.
-
-```bash
-# From the project root — start the backend with the demo profile
-mvn spring-boot:run -Dspring-boot.run.profiles=demo
-```
-
-> `record.js` performs a pre-flight check against `GET /api/demo/health` and aborts with a clear error if the server is down or the profile is inactive.
-
-### 2. FFmpeg must be installed
-
-`merge_video_audio.js` invokes `ffmpeg` and `ffprobe` as system commands.
-
-```bash
-# Ubuntu / Debian
-sudo apt install ffmpeg
-
-# macOS (Homebrew)
-brew install ffmpeg
-```
+## Goal
+Evolve the current `video-recorder/` tooling from a logistics-hub-specific script into a **reusable video production engine** that can generate narrated demo videos for any web application.
 
 ---
 
-## 📦 Install Dependencies
+## Architecture Overview
 
-Run this once inside the `video-recorder/` directory:
-
-```bash
-npm install
-npx playwright install chromium
 ```
+video-recorder/
+├── engine/                     ← Generic pipeline (project-agnostic)
+│   ├── record.js               ← Scenario-driven Playwright recorder
+│   ├── generate_audio.js       ← TTS generator from scenario.audioText
+│   ├── merge_video_audio.js    ← FFmpeg audio-video synchronizer
+│   └── utils.js                ← Shared helpers
+│
+├── scenarios/                  ← One subfolder per project
+│   ├── logistics-hub/          ← Existing AI Logistics Hub demo
+│   │   ├── scenario.js         ← Scene definitions, URLs, narration
+│   │   └── videos/             ← Generated artifacts for this scenario
+│   │
+│   └── _template/              ← Starter template for new projects
+│       └── scenario.js         ← Minimal scenario template
+│
+├── package.json
+└── README.md
+```
+
+### Key Principle
+**The engine knows nothing about the target project.** All project-specific details (URLs, CSS selectors, narration text, input payloads) live exclusively in `scenarios/<project>/scenario.js`.
 
 ---
 
-## 🚀 Running the Pipeline
+## � Running the Pipeline
 
-### Full pipeline (audio → record → merge)
+To generate a video, you must specify the scenario file path using the `--scenario` argument.
 
+### Full build (audio + record + merge)
 ```bash
-npm run build-video
+npm run build-video --scenario=scenarios/logistics-hub/scenario.js
 ```
 
-> **Requires the backend to be running first.** See Prerequisites above.
-
-### Individual steps
-
-| Script | Command | Backend needed? |
-|---|---|---|
-| Generate narration MP3s | `npm run generate-audio` | ❌ No |
-| Record the Playwright video | `npm run record` | ✅ Yes |
-| Merge video + audio with FFmpeg | `npm run merge` | ❌ No |
-
----
-
-## 📁 Output
-
-| File | Description |
+### Individual Steps
+| Script | Command |
 |---|---|
-| `videos/audio_blocks/block_*.mp3` | Generated TTS narration clips |
-| `videos/final_showcase.webm` | Raw Playwright recording (no audio) |
-| `videos/final_showcase_with_audio.webm` | **Final output** — video with narration |
+| Generate narration | `npm run generate-audio --scenario=...` |
+| Record video | `npm run record --scenario=...` |
+| Merge audio/video | `npm run merge --scenario=...` |
 
-> These files are gitignored and will not be committed.
+---
+
+## �️ Creating a New Scenario
+
+1. **Copy the template**: `cp -r scenarios/_template scenarios/my-new-project`
+2. **Edit `scenario.js`**: Define your `baseUrl`, scenes, durations, and Playwright actions.
+3. **Run the build**: `npm run build-video --scenario=scenarios/my-new-project/scenario.js`
+
+---
+
+## 📁 Output Artifacts
+All generated files are stored within the project's specific folder:
+`scenarios/<project>/videos/`
+
+- `audio_blocks/`: Individual TTS clips.
+- `raw_recording.webm`: Raw Playwright capture.
+- `final_video.webm`: Final narrated showcase.
+
+---
+
+## ⚠️ Prerequisites
+1. **Node.js Dependencies**: Run `npm install` and `npx playwright install chromium`.
+2. **FFmpeg**: Must be installed on the system (`sudo apt install ffmpeg`).
+3. **Application State**: Ensure the target application is running and accessible at the `baseUrl` defined in the scenario.

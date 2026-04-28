@@ -2,7 +2,26 @@
 
 All notable changes to this project will be documented in this file.
  
+## [1.2.4] - 2026-04-28
+
+### Added
+- **General-Purpose Video Engine**: Refactored the video production pipeline into a reusable engine located in `video-recorder/engine/`.
+- **Scenario-Driven Architecture**: The engine is now completely decoupled from project-specific logic. All URLs, selectors, and narration live in project-specific scenario files under `video-recorder/scenarios/`.
+- **Scenario Template**: Added `video-recorder/scenarios/_template/scenario.js` as a starter for new video projects.
+- **Logistics Hub Scenario**: Migrated the existing AI Logistics Hub demo into its own scenario folder (`video-recorder/scenarios/logistics-hub/`).
+
+### Changed
+- **Pipeline Execution**: Updated npm scripts in `video-recorder/package.json` to require a `--scenario` argument (e.g., `npm run build-video --scenario=scenarios/logistics-hub/scenario.js`).
+- **Path Standardization**: Consolidated all output artifacts (video, audio, screenshots) into the scenario-specific `videos/` folder.
+- **Documentation Consolidation**: Merged `VIDEO_STEPS.md` into `RECORDING.md` and deleted the redundant file.
+- **Roadmap Synchronization**: Updated `roadmap.md` to reflect the persistent H2 database state and the removal of the `atempo` audio filter.
+
+### Fixed
+- **Stale Documentation**: Corrected multiple references to "in-memory H2" in `roadmap.md` and `verify_usage.sh` following the migration to file-based persistence.
+- **Screenshot Path**: Fixed `record.js` to write the error screenshot into the `videos/` directory instead of the project root.
+
 ## [1.2.3] - 2026-04-27
+
 
 ### Added
 - **Video Pipeline Pre-flight Checks**: `record.js` now validates both server availability and `demo` Spring profile activation before launching Playwright, aborting with an actionable error message if either check fails.
