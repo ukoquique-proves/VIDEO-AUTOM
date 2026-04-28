@@ -48,6 +48,7 @@ Connect logistics data streams to modern communication tools (Slack, Email) by e
 - [x] **Automated Audio**: Implemented TTS generation and FFmpeg mixing pipeline.
 - [x] **Final Sync**: Resolved voice overlaps using naturally-paced narration blocks.
 - [x] **Production Ready**: Generated `final_showcase_with_audio.webm` with synchronized narration.
+- [ ] **High-Fidelity Narration**: Replace `gtts` with ElevenLabs or Azure Speech (REST API) to leverage professional-grade voices while maintaining the existing scene-based text blocks.
 - [ ] **Marketing**
     - [ ] Design high-impact thumbnail.
     - [ ] Global rollout (LinkedIn/Discord).
