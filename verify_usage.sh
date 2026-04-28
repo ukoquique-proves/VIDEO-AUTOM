@@ -6,7 +6,7 @@ BASE_URL="http://localhost:8080/api"
 echo "=== AI Logistics Automation Hub Usage Verification ==="
 
 # 1. Send Existing Extraction to Email
-# Requires an ID that exists in the DB. Since we use H2 mem, we might need to seed it first or this will 404.
+# Requires an ID that exists in the DB. Since we use file-based H2, records are persistent.
 echo "1. Sending Extraction #1 to Email..."
 curl -X POST "$BASE_URL/send/email/1?to=test@example.com" -v
 

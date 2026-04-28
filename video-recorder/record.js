@@ -86,7 +86,7 @@ async function checkServer() {
         console.log('Finished all scenes. Closing context to save video...');
     } catch (error) {
         console.error('An error occurred during the script execution:', error);
-        await page.screenshot({ path: path.join(__dirname, 'error-screenshot.png') });
+        await page.screenshot({ path: path.join(videoDir, 'error-screenshot.png') });
     } finally {
         const video = page.video();
         await context.close(); 

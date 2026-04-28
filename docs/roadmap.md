@@ -6,7 +6,7 @@ Connect logistics data streams to modern communication tools (Slack, Email) by e
 ## Technology Stack
 - **Language**: Java 17
 - **Framework**: Spring Boot 3
-- **Database**: H2 (In-memory)
+- **Database**: H2 (Persistent)
 - **Build Tool**: Maven
 - **Integrations**: Groq AI, Slack Webhooks, SMTP Email
 
@@ -46,7 +46,7 @@ Connect logistics data streams to modern communication tools (Slack, Email) by e
 ### Phase 6: Promotional Video Production ✅
 - [x] **Visual Assets**: Successfully generated automated showcase clips using Playwright.
 - [x] **Automated Audio**: Implemented TTS generation and FFmpeg mixing pipeline.
-- [x] **Final Sync**: Resolved voice overlaps using `atempo` time-stretching.
+- [x] **Final Sync**: Resolved voice overlaps using naturally-paced narration blocks.
 - [x] **Production Ready**: Generated `final_showcase_with_audio.webm` with synchronized narration.
 - [ ] **Marketing**
     - [ ] Design high-impact thumbnail.

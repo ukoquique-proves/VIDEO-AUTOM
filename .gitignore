@@ -47,4 +47,4 @@ h2_data/
 video-recorder/videos/
 
 # Debug screenshot captured by record.js on failure
-video-recorder/error-screenshot.png
+video-recorder/videos/error-screenshot.png
