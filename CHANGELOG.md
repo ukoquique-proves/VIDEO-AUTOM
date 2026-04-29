@@ -70,7 +70,7 @@ All notable changes to this project will be documented in this file.
 - **Final Audio Block Overlap**: Shortened the `block_55` narration text so its TTS output fits within the 5-second slot available before end-of-video.
 
 ### Security / Hygiene
-- **`.gitignore` Hardened**: Added `node_modules/`, `h2_data/`, and `video-recorder/videos/` to prevent build artefacts, database files, and generated media from being accidentally committed.
+- **`.gitignore` Hardened**: Added `node_modules/`, `h2_data/`, and scenario-specific video directories to prevent build artefacts, database files, and generated media from being accidentally committed.
 
 ## [1.2.2] - 2026-04-26
 

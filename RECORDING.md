@@ -48,7 +48,7 @@ This document outlines the automated recording sequence for the promotional vide
 
 Since the browser subagent recordings were taking too long and experiencing timeouts attempting a single cohesive take, we are currently generating the recording via a **Node.js Playwright script**. 
 
-This script natively connects to `localhost:8080`, executes the requested interactions exactly as outlined above, and leverages Playwright's built-in `recordVideo` functionality to reliably export a `.webm` file into the `video-recorder/videos` directory.
+This script natively connects to `localhost:8080`, executes the requested interactions exactly as outlined above, and leverages Playwright's built-in `recordVideo` functionality to reliably export a `.webm` file into the `video-recorder/scenarios/<scenario>/videos/` directory.
 
 ### ⚠️ Prerequisites Before Running Any Script
 

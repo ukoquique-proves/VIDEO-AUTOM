@@ -45,6 +45,5 @@ h2_data/
 
 # Generated video & audio artifacts from the recording pipeline
 video-recorder/scenarios/*/videos/
-video-recorder/videos/
 **/metadata.json
 
